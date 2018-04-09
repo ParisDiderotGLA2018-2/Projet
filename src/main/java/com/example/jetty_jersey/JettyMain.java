@@ -22,7 +22,7 @@ public class JettyMain {
 		// Add a connector
 		ServerConnector connector = new ServerConnector(server);
 		connector.setHost("127.0.0.1");
-		connector.setPort(8088);
+		connector.setPort(8080);
 		connector.setIdleTimeout(30000);
 		server.addConnector(connector);
 
@@ -42,7 +42,7 @@ public class JettyMain {
 		ResourceHandler handlerPortal = new ResourceHandler();
 		handlerPortal.setResourceBase("src/main/webapp");
 		handlerPortal.setDirectoriesListed(false);
-		handlerPortal.setWelcomeFiles(new String[] { "index.html" });
+		handlerPortal.setWelcomeFiles(new String[] { "login.html" });
 		ContextHandler handlerPortalCtx = new ContextHandler();
 		handlerPortalCtx.setContextPath("/");
 		handlerPortalCtx.setHandler(handlerPortal);
