@@ -69,7 +69,7 @@ http://www.templatemo.com/tm-511-journey
                         </div> <!-- row -->
                         <div class="row tm-banner-row" id="tm-section-search">
                             
-                            <form class="tm-search-form tm-section-pad-2" action="ws/index/login" method="GET">
+                            <form class="tm-search-form tm-section-pad-2" action="ws/index" method="GET">
                                 <p id="erreur" style="background-color:#ff0000"></p>
                                 <div class="form-row tm-search-form-row">                                
                                     <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
@@ -116,7 +116,7 @@ http://www.templatemo.com/tm-511-journey
                         </div> <!-- row -->
                         <div class="row tm-banner-row" id="tm-section-search">
                            
-                            <form class="tm-search-form tm-section-pad-2" action="ws/index/signup" method="POST">
+                            <form class="tm-search-form tm-section-pad-2" action="ws/index" method="POST">
                                 <div class="form-row tm-search-form-row">                                
                                     <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
                                         <label for="username"></label>
@@ -130,10 +130,10 @@ http://www.templatemo.com/tm-511-journey
                         
                                 
                                 <div class="form-row tm-search-form-row">
-                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+                                    <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
                                         <label for="signupbtn"></label>
-                                        
-                                         <input type="button" name="" id="signupbtn">
+                                        <button type="submit" class="btn btn-primary tm-btn tm-btn-search " id="signupbtn">sign up</button>
+                                         
                                     </div>
                                 </div>                              
                             </form>                             
@@ -181,7 +181,7 @@ http://www.templatemo.com/tm-511-journey
 function callDone(result){
    
        
-        var  sr=200;
+        var  sr="200";
 
         sr=JSON.stringify(result);
 
@@ -199,12 +199,12 @@ function callDone(result){
 
 $(function(){
     $("#signupbtn").click(function(){
-        getServerData("ws/index/signup",callDone);
+        getServerData("ws/index",callDone);
     });
 
 
     $("#loginbtn").click(function(){
-        getServerData("ws/index/login",callDone);
+        getServerData("ws/index",callDone);
     });
 
 
