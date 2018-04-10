@@ -88,9 +88,7 @@ http://www.templatemo.com/tm-511-journey
                 <div class="col-xs-12 mx-auto tm-about-text-wrap " id="btnmymapshow"> 
                     
                     <button onclick="setNewMap();" type="submit" class="btn btn-primary tm-btn-search " id="btnadd">Add map/place</button>
-                   </br>
                     <button onclick="updateMap();" type="submit" class="btn btn-primary tm-btn-search " id="btnupdate">Update place</button>
-                    </br>
                     <button onclick="deleteMarker();" type="submit" class="btn btn-primary tm-btn-search " id="btndelete">delete place</button>
                     
                                         
@@ -255,7 +253,8 @@ http://www.templatemo.com/tm-511-journey
     <script src="js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
     <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
     <script src="js/jquery.scrollTo.min.js"></script>           <!-- https://github.com/flesler/jquery.scrollTo -->
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     
     <script type="text/javascript" src="home.js"></script>
     <script type="text/javascript" src="index.js"></script>  
@@ -322,6 +321,18 @@ http://www.templatemo.com/tm-511-journey
     </script>             
 
 
+          <script id="location_window_info" type="text/template">
+              <div id="detail" class="info-window">
+                  <div class="info-content">
+                 <h2> <%= name %> </h2>
+                 <h3> <%= place %> </h3>
+                 <p> <%= msg %> </p>
+                 <div class="tm-slideshow">
+                 <img src = <%= filename %>  alt="Image" >
+                 </div>
+                 </div>
+                 </div>
+          </script>
 
 </body>
 </html>

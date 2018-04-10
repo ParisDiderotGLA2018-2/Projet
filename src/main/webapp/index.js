@@ -128,16 +128,14 @@
 
           var lt=ll[i].lat;
           var lg=ll[i].lng;
-             var d='<div id="detail" class="info-window">' +
-                     '<div class="info-content">' +
-                    '<h2>'+result[j].name+'</h2>'+
-                    '<h3>'+ll[i].place+'</h3>'+
-                    '<p>'+ll[i].msg+'</p>'+
-                    '<div class="tm-slideshow">'+
-                    '<img src="'+ll[i].filename+'" alt="Image">'+ 
-                    '</div>'+
-                    '</div>'+
-                    '</div>';
+          var obj = {
+              name: result[j].name,
+              place: ll[i].place,
+              msg: ll[i].msg,
+              filename:ll[i].filename,
+          };
+          var d_template = _.template($('#location_window_info').html());
+          var d = d_template(obj);
 
           
      
