@@ -578,7 +578,7 @@ footer p { color: white; }
         background: white;
     }
 
-    .tm-top-bar, .tm-top-bar-bg { height: auto; }
+    .tm-top-bar, .tm-top-bar-bg { height: 60px; }
 
     #mainNav {
         width: 200px;
