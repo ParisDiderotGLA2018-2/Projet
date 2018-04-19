@@ -52,6 +52,9 @@ public class Bdd {
 		return client;
 		
 	}
+	public static void disconnect(){
+		Bdd.client.close();
+	}
 	public static void test(String[] args) {
 		// TODO Auto-generated method stub
 		TransportClient client = connectionToBD();
