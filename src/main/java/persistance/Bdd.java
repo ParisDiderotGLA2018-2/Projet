@@ -38,14 +38,17 @@ public class Bdd {
 
 	private static TransportClient client = null;
 	
+	@SuppressWarnings("resource")
 	public synchronized static TransportClient connectionToBD(){
 		if(client == null) {
 			try {
-				client = new PreBuiltTransportClient(Settings.EMPTY)
+				Settings settings = Settings.builder()
+				        .put("client.transport.sniff", true).build();
+				TransportClient client = new PreBuiltTransportClient(settings)
 						.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300))
 						.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
 
-			} catch (UnknownHostException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

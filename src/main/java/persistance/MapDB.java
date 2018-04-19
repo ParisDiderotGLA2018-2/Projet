@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.document.DocumentField;
+
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
+import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.User;
 
@@ -71,8 +74,14 @@ public class MapDB implements MapDAO {
 				.get();
 		for(MultiSearchResponse.Item item : sr.getResponses()){
 			SearchResponse response = item.getResponse();
-			System.out.println(item.toString());
-			System.out.println(response.getHits().toString());
+			SearchHits hits = response.getHits();
+			for (int i = 0; i < hits.getTotalHits(); i++) {
+				Map<String, DocumentField> reponseFields = hits.getAt(i).getFields();
+				DocumentField d = reponseFields.get("place");
+				String place = d.getValue();
+				System.out.println(item.toString());
+			
+			}
 		}
 		return null;
 	}
