@@ -40,19 +40,20 @@ public class Bdd {
 	
 	@SuppressWarnings("resource")
 	public synchronized static TransportClient connectionToBD(){
-		if(client == null) {
+		if(Bdd.client == null) {
+			System.out.println("Connection DB ");
 			try {
 				Settings settings = Settings.builder()
 				        .put("client.transport.sniff", true).build();
-				TransportClient client = new PreBuiltTransportClient(settings)
-						.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300))
-						.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+				Bdd.client = new PreBuiltTransportClient(settings)
+						.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300))
+					;//	.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return client;
+		return Bdd.client;
 		
 	}
 	public static void disconnect(){

@@ -17,8 +17,8 @@ public class Test {
 		logger.debug("Test app start");
 		//	insert_user_test();
 		//	update_user_test();
-		
-		db.getMaps(U);
+		insert_map_test();
+		get_map_test();
 		logger.debug("end");
 		Bdd.disconnect();
 	}
@@ -42,6 +42,7 @@ public class Test {
 	}
 	public static void insert_map_test(){
 		MMap [] mp= {new MMap("PARIS",U,"public"),new MMap("IFNI",U,"public")};
+		System.out.println("add map");
 		db.addMap(mp[1]);
 	}
 	public static void insert_user_test(){

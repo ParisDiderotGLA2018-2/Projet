@@ -66,6 +66,7 @@ public class MapDB implements MapDAO {
 	
 	public  MMap[] getMaps(User u) {
 		TransportClient client = Bdd.connectionToBD();
+		System.out.println("get maps");
 		SearchRequestBuilder srb2 = client
 			    .prepareSearch().setQuery(QueryBuilders.matchQuery("creator", u.login )).setSize(1);
 
