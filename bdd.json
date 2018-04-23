@@ -1,0 +1,85 @@
+{
+  "_commentaire" : "Documents non correct, idée d'implémentation de la base de donnée."
+}
+
+
+PUT user {
+    "mappings" : {
+        "user" : {
+            "properties" : {
+                "username" : { "type" : "text" },
+                "email" : { "type" : "text" },
+                "password" : {"type" : "password"}
+            }
+        }
+      }
+}
+
+PUT map {
+  "mappings" : {
+    "map" : {
+      "properties" : {
+        "name" : { "type": "text"},
+        "visibily" : {"type" : "integer"},
+        "creator" : {"type" : "text"},
+        "loc" : { "type":"integer" },
+        "tag" : { "type" : "integer"},
+        "date_creat" : {"type" : "date"}
+      }
+    }
+  }
+}
+
+PUT location {
+  "mappings" : {
+    "location" : {
+      "properties" : {
+        "name": {"type": "text"},
+        "posX" : { "type" : "integer"},
+        "posY" : { "type": "integer"},
+        "image" : {"type" : "text"}
+      }
+    }
+  }
+}
+PUT message {
+  "mappings" : {
+    "message" : {
+      "properties" : {
+        "mess_txt" : {
+          "type" : "text"
+        }
+      }
+    }
+  }
+}
+PUT image {
+  "mappings" : {
+    "image" : {
+      "properties" : {
+        "url" : {
+          "type" : "text"
+        }
+      }
+    }
+  }
+}
+PUT tag {
+  "mappings" : {
+    "tag" : {
+      "properties" : {
+        "name" : {"type" : "text"}
+      }
+    }
+  }
+}
+Put friend{
+  "mappings" : {
+    "tag" : {
+      "properties": {
+        "user1" : {"type":"text"},
+        "user2" : {"type" : "text"} 
+      }
+    }
+  }
+}
