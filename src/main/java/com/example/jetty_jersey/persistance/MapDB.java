@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 
 import java.util.ArrayList;
 
@@ -34,18 +34,18 @@ import com.example.jetty_jersey.model.User;
 
 public class MapDB implements MapDAO {
 
-	
+
 	/*
-	 * 
-	 * Location : 
+	 *
+	 * Location :
 	 * 	public String place;
 		public double lat;
 		public double lng;
 		public String tag;
 		public String msg;
-		public String filename; 
-	
-	* 
+		public String filename;
+
+	*
 	 */
 	public void addLocation(Location l) throws IOException{
 		TransportClient client = Bdd.connectionToBD();
@@ -61,9 +61,9 @@ public class MapDB implements MapDAO {
 		                    .endObject()
 		                  )
 		        .get();
-		
+
 	}
-	
+
 	public  MMap[] getMaps(User u) {
 		TransportClient client = Bdd.connectionToBD();
 		System.out.println("get maps");
@@ -81,7 +81,7 @@ public class MapDB implements MapDAO {
 				DocumentField d = reponseFields.get("place");
 				String place = d.getValue();
 				System.out.println(item.toString());
-			
+
 			}
 		}
 		return null;

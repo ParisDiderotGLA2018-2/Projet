@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 import com.example.jetty_jersey.model.*;
 
 public interface UserDAO {
@@ -7,5 +7,3 @@ public interface UserDAO {
 		void editUser(int id, User instance);
 		void deleteUser(User instance);
 }
-
-

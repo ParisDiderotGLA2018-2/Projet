@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public class Test {
 	static User U = new User("bla","blo");
 	static MapDB db = new MapDB();
     private static final Logger logger = LogManager.getLogger(Test.class);
-    
+
 	public static void main(String [] args){
 		logger.debug("Test app start");
 		//	insert_user_test();
@@ -32,7 +32,7 @@ public class Test {
 		Location loc2 = new Location("...IKHAN...",48.87386089807715,2.294940948486328,"IKAN",".............................","img/paris2.jpg");
 		Location loc3 = new Location("blablo",48.8386053,2.378623100000027,"IKAN","the view from the topis just breathtaking","img/plage1.jpg");
 		Location loc4 = new Location("...blablo...",41.38773117668287,2.201385498046875,"IKAN",".............................","img/plage2.jpg");
-	
+
 		try {
 			db.addLocation(loc1);
 		} catch (IOException e) {
@@ -55,5 +55,5 @@ public class Test {
 		UserDB u = new UserDB();
 		u.editUser(2, new User("tata2","toto"));
 	}
-	
+
 }
