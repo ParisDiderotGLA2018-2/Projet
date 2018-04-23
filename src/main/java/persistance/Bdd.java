@@ -53,6 +53,10 @@ public class Bdd {
 				e.printStackTrace();
 			}
 		}
+		if(Bdd.client == null){
+			System.out.println("La connexion à échouer");
+			System.exit(1);
+		}
 		return Bdd.client;
 		
 	}
