@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -37,7 +37,7 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 public class Bdd {
 
 	private static TransportClient client = null;
-	
+
 	@SuppressWarnings("resource")
 	public synchronized static TransportClient connectionToBD(){
 		if(Bdd.client == null) {
@@ -58,7 +58,7 @@ public class Bdd {
 			System.exit(1);
 		}
 		return Bdd.client;
-		
+
 	}
 	public static void disconnect(){
 		Bdd.client.close();
@@ -71,9 +71,9 @@ public class Bdd {
 		json.put("postDate",new Date());
 		json.put("message","trying out Elasticsearch");
 		/**
-		 * Creer un JSON : 
+		 * Creer un JSON :
 		 */
-		
+
 		try {
 			XContentBuilder builder = XContentFactory.jsonBuilder().startObject()
 				        .field("user", "kimchy")
@@ -113,9 +113,9 @@ public class Bdd {
 		long _version = response.getVersion();
 		// status has stored current instance statement.
 		RestStatus status = response.status();
-		
+
 		System.out.println(_index + _type + _id + _version );
-	
+
 
 	}
 }

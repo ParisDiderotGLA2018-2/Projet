@@ -19,11 +19,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import com.example.jetty_jersey.model.*;
-import persistance.*;
+import com.example.jetty_jersey.persistance.*;
 
 @Path("/index")
 public class UserRest {
-	@GET
+	/*@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUser(@QueryParam("name") String name,@QueryParam("pass")  String pass) {
@@ -49,7 +49,7 @@ public class UserRest {
 	    	}
 		return null;
 		
-	}
+	}*/
 	
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -57,10 +57,12 @@ public class UserRest {
     	try {
     		URI location;	
     		//DAO.addUser(U);
+    		UserDB udb = new UserDB();
     		String output = "POST : name: "+name+" and pass : "+pass;
     		System.out.println(output);
-    		if(true)////name.equals(DAO.verifierUser(name)); //jsp la condition si le login existe deja par EX
+    		if(udb.addUser(new User(name, pass)))////name.equals(DAO.verifierUser(name)); //jsp la condition si le login existe deja par EX
     		{	
+    			
     			location = new URI("http://localhost:8088/index.html");
     			return Response.temporaryRedirect(location).build();
     		}else 

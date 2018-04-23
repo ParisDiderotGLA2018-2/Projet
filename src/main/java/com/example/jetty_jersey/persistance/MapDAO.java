@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 
 import com.example.jetty_jersey.model.*;
 

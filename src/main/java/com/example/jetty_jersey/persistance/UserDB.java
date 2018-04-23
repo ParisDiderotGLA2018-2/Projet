@@ -1,4 +1,4 @@
-package persistance;
+package com.example.jetty_jersey.persistance;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
@@ -27,14 +27,14 @@ public class UserDB implements UserDAO {
 		updateByQuery.source("user").abortOnVersionConflict(false);
 		BulkByScrollResponse response = updateByQuery.get();
 	}
-	
+
 	public boolean checkUser(User instance) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("user")
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 		        .setQuery(QueryBuilders.termQuery("login", instance.login))                 // Query
 		        .get();
-		
+
 		return false;
 	}
 
