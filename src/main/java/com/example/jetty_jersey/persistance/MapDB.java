@@ -12,7 +12,6 @@ import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilders;
-<<<<<<< HEAD
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
@@ -20,12 +19,10 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.User;
-=======
 import org.elasticsearch.index.reindex.ScrollableHitSource.Hit;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
->>>>>>> refs/remotes/origin/master
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
 import com.example.jetty_jersey.model.User;
@@ -74,7 +71,6 @@ public class MapDB implements MapDAO {
 		for(MultiSearchResponse.Item item : sr.getResponses()){
 			SearchResponse response = item.getResponse();
 			SearchHit[] hits = response.getHits().getHits();
-<<<<<<< HEAD
 			for (SearchHit hit : hits) {
 				String tag = (String) hit.getSourceAsMap().get("tag");
 				System.out.println(tag);
@@ -83,10 +79,6 @@ public class MapDB implements MapDAO {
 				String place = d.getValue();
 				System.out.println(item.toString());*/
 
-=======
-			for (SearchHit hi : hits) {
-				String tag = (String) hi.getSourceAsMap().get("tag");
->>>>>>> refs/remotes/origin/master
 			}
 		}
 		return null;
