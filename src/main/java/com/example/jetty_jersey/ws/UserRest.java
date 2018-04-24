@@ -23,19 +23,19 @@ import com.example.jetty_jersey.persistance.*;
 
 @Path("/index")
 public class UserRest {
-	/*@GET
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUser(@QueryParam("name") String name,@QueryParam("pass")  String pass) {
 		try {
-			User U = new User(name, pass);
-		
+			User u = new User(name, pass);
+			UserDB udb = new UserDB();
 			//200 or 403
 			String output = "GET :name: "+name+" and pass : "+pass;
 			System.out.println(output);
 			URI location;
 			
-			if(true) // UserDAO.checkUser(U) méthode du DAO qui check si le user existe
+			if(udb.checkUser(u)) // UserDAO.checkUser(U) méthode du DAO qui check si le user existe
 			{	
 		       location = new URI("http://localhost:8088/index.html");
 		       return Response.temporaryRedirect(location).build();
@@ -49,7 +49,7 @@ public class UserRest {
 	    	}
 		return null;
 		
-	}*/
+	}
 	
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

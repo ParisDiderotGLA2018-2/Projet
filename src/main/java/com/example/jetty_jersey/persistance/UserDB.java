@@ -8,14 +8,17 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
+import org.elasticsearch.search.SearchHit;
 
 import com.example.jetty_jersey.model.User;
 
@@ -30,11 +33,36 @@ public class UserDB implements UserDAO {
 
 	public boolean checkUser(User instance) {
 		TransportClient client = Bdd.connectionToBD();
-		SearchResponse response = client.prepareSearch("user")
+		/*SearchResponse response = client.prepareSearch("user")
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 		        .setQuery(QueryBuilders.termQuery("login", instance.login))                 // Query
-		        .get();
+		        .get();*/
+		
+		SearchResponse response = client.prepareSearch("user")
+        //.setTypes("type1", "type2")
+        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+        .setQuery(QueryBuilders.matchPhraseQuery("login", instance.login))                 // Query
+        //.setPostFilter(QueryBuilders.rangeQuery("age").from(12).to(18))     // Filter
+        //.setFrom(0).setSize(60).setExplain(true)
+        .execute()
+        .actionGet();
+		/*final SearchResponse response = client.prepareSearch("user")
+				    //.setTypes("username")
+				    .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+				    .setQuery(QueryBuilders.matchAllQuery())
+				    .setFrom(0)
+				    .setSize(10)
+				    .setTimeout(TimeValue.timeValueMillis(100))
+				    .get(TimeValue.timeValueMillis(200));*/
+				 
+		SearchHit[] sh = response.getHits().getHits();
+		for(SearchHit searchH: sh) {
+			//System.out.println(searchH.getSourceAsString());
+			String nom=(String) searchH.getSourceAsMap().get("login");
+			System.out.println(nom);
+		}
 
+		
 		return false;
 	}
 

@@ -24,10 +24,10 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.User;
-
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
 import com.example.jetty_jersey.model.User;
@@ -75,12 +75,14 @@ public class MapDB implements MapDAO {
 				.get();
 		for(MultiSearchResponse.Item item : sr.getResponses()){
 			SearchResponse response = item.getResponse();
-			SearchHits hits = response.getHits();
-			for (int i = 0; i < hits.getTotalHits(); i++) {
-				Map<String, DocumentField> reponseFields = hits.getAt(i).getFields();
+			SearchHit[] hits = response.getHits().getHits();
+			for (SearchHit hit : hits) {
+				String tag = (String) hit.getSourceAsMap().get("tag");
+				System.out.println(tag);
+				/*Map<String, DocumentField> reponseFields = hits.getAt(i).getFields();
 				DocumentField d = reponseFields.get("place");
 				String place = d.getValue();
-				System.out.println(item.toString());
+				System.out.println(item.toString());*/
 
 			}
 		}

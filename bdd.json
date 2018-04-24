@@ -1,14 +1,8 @@
-{
-  "_commentaire" : "Documents non correct, idée d'implémentation de la base de donnée."
-}
-
-
 PUT user {
     "mappings" : {
         "user" : {
             "properties" : {
                 "username" : { "type" : "text" },
-                "email" : { "type" : "text" },
                 "password" : {"type" : "password"}
             }
         }
@@ -78,7 +72,7 @@ Put friend{
     "tag" : {
       "properties": {
         "user1" : {"type":"text"},
-        "user2" : {"type" : "text"} 
+        "user2" : {"type" : "text"}
       }
     }
   }

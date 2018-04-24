@@ -1,0 +1,3 @@
+node:
+    name: transport
+transport.host: localhost
