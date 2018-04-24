@@ -20,7 +20,7 @@ public class Test {
 		insert_map_test();
 		get_map_test();
 		logger.debug("end");
-		Bdd.disconnect();
+		//Bdd.disconnect();
 	}
 	public static void get_map_test(){
 		System.out.println("Test get map");

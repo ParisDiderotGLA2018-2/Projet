@@ -1,7 +1,5 @@
 package com.example.jetty_jersey.persistance;
 
-import java.util.ArrayList;
-
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.document.DocumentField;
@@ -9,18 +7,12 @@ import org.elasticsearch.common.document.DocumentField;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
-import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
+<<<<<<< HEAD
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
@@ -28,9 +20,16 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.User;
+=======
+import org.elasticsearch.index.reindex.ScrollableHitSource.Hit;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+
+>>>>>>> refs/remotes/origin/master
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
 import com.example.jetty_jersey.model.User;
+
 
 public class MapDB implements MapDAO {
 
@@ -69,13 +68,13 @@ public class MapDB implements MapDAO {
 		System.out.println("get maps");
 		SearchRequestBuilder srb2 = client
 			    .prepareSearch().setQuery(QueryBuilders.matchQuery("creator", u.login )).setSize(1);
-
 		MultiSearchResponse sr = client.prepareMultiSearch()
 				.add(srb2)
 				.get();
 		for(MultiSearchResponse.Item item : sr.getResponses()){
 			SearchResponse response = item.getResponse();
 			SearchHit[] hits = response.getHits().getHits();
+<<<<<<< HEAD
 			for (SearchHit hit : hits) {
 				String tag = (String) hit.getSourceAsMap().get("tag");
 				System.out.println(tag);
@@ -84,21 +83,14 @@ public class MapDB implements MapDAO {
 				String place = d.getValue();
 				System.out.println(item.toString());*/
 
+=======
+			for (SearchHit hi : hits) {
+				String tag = (String) hi.getSourceAsMap().get("tag");
+>>>>>>> refs/remotes/origin/master
 			}
 		}
 		return null;
 	}
-
-	public String[] getListMapName(User U) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public MMap InfoLocation(String login, String mapName, String mapPlace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	/*
 	 * 	public String name;
@@ -126,14 +118,26 @@ public class MapDB implements MapDAO {
 			e.printStackTrace();
 		}
 	}
+
+
+	public String[] getListMapName(User U) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MMap InfoLocation(String login, String mapName, String mapPlace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void deletePlace(MMap instance, Location l) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void deleteMap(MMap instance) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

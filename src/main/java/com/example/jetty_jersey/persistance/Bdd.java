@@ -16,23 +16,9 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
-
-import com.fasterxml.jackson.*;
-
-//import com.fasterxml.jackson.core.JsonFactory;
-//import org.elasticsearch.common.xcontent.json.*;
-//import org.codehaus.jackson.JsonGenerationException;
-//import org.codehaus.jackson.map.JsonMappingException;
-//import org.codehaus.jackson.map.ObjectMapper;
-//import org.elasticsearch.*;
-//import org.elasticsearch.client.Client;
-//import org.elasticsearch.client.transport.*;
 import org.elasticsearch.common.settings.Settings;
-//import org.elasticsearch.common.transport.*;
-//import org.elasticsearch.client.*;
-//import org.elasticsearch.transport.*;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-//import org.elasticsearch.node.Node;
+
 
 public class Bdd {
 
@@ -44,10 +30,10 @@ public class Bdd {
 			System.out.println("Connection DB ");
 			try {
 				Settings settings = Settings.builder()
-				        .put("client.transport.sniff", true).build();
+				       .put("client.transport.sniff", true).build();
 				Bdd.client = new PreBuiltTransportClient(settings)
 						.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300))
-					;//	.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+				;//		.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
 			} catch (Exception e) {
 				e.printStackTrace();
