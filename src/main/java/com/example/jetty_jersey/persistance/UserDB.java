@@ -33,36 +33,20 @@ public class UserDB implements UserDAO {
 
 	public boolean checkUser(User instance) {
 		TransportClient client = Bdd.connectionToBD();
-		/*SearchResponse response = client.prepareSearch("user")
-		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-		        .setQuery(QueryBuilders.termQuery("login", instance.login))                 // Query
-		        .get();*/
 		
 		SearchResponse response = client.prepareSearch("user")
-        //.setTypes("type1", "type2")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-        .setQuery(QueryBuilders.matchPhraseQuery("login", instance.login))                 // Query
-        //.setPostFilter(QueryBuilders.rangeQuery("age").from(12).to(18))     // Filter
-        //.setFrom(0).setSize(60).setExplain(true)
-        .execute()
-        .actionGet();
-		/*final SearchResponse response = client.prepareSearch("user")
-				    //.setTypes("username")
-				    .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				    .setQuery(QueryBuilders.matchAllQuery())
-				    .setFrom(0)
-				    .setSize(10)
-				    .setTimeout(TimeValue.timeValueMillis(100))
-				    .get(TimeValue.timeValueMillis(200));*/
+        .setQuery(QueryBuilders.matchPhraseQuery("login", instance.login))
+        .get();
 				 
-		SearchHit[] sh = response.getHits().getHits();
-		for(SearchHit searchH: sh) {
-			//System.out.println(searchH.getSourceAsString());
-			String nom=(String) searchH.getSourceAsMap().get("login");
-			System.out.println(nom);
+		SearchHit[] hitTab = response.getHits().getHits();
+		if(hitTab.length != 0) {
+			SearchHit hit = hitTab[0];
+			String password = (String) hit.getSourceAsMap().get("password");
+			if(password.equals(instance.password)) {
+				return true;
+			}
 		}
-
-		
 		return false;
 	}
 
@@ -70,7 +54,10 @@ public class UserDB implements UserDAO {
 		User inst =  instance;
 		TransportClient client = Bdd.connectionToBD();
 		//UserDB.authoriseModifUser();
-		Map<String, Object> json = new HashMap<String, Object>();
+		//Map<String, Object> json = new HashMap<String, Object>();
+		if(checkUser(instance)) {
+			return false;
+		}
 		IndexResponse response = null;
 		try {
 			response = client.prepareIndex("user","name")

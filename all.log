@@ -1,0 +1,54 @@
+2018-04-25 12:36:34.867 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - no modules loaded
+2018-04-25 12:36:34.872 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018-04-25 12:36:34.872 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018-04-25 12:36:34.872 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018-04-25 12:36:34.872 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2018-04-25 12:36:34.873 [qtp1299641336-24] INFO  org.elasticsearch.plugins.PluginsService - loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018-04-25 12:36:34.921 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [force_merge], size [1], queue size [unbounded]
+2018-04-25 12:36:34.923 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [fetch_shard_started], core [1], max [16], keep alive [5m]
+2018-04-25 12:36:34.923 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [listener], size [4], queue size [unbounded]
+2018-04-25 12:36:34.927 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [index], size [8], queue size [200]
+2018-04-25 12:36:34.927 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [refresh], core [1], max [4], keep alive [5m]
+2018-04-25 12:36:34.928 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [generic], core [4], max [128], keep alive [30s]
+2018-04-25 12:36:34.928 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [warmer], core [1], max [4], keep alive [5m]
+2018-04-25 12:36:34.931 [qtp1299641336-24] DEBUG org.elasticsearch.common.util.concurrent.QueueResizingEsThreadPoolExecutor - thread pool [_client_/search] will adjust queue by [50] when determining automatic queue size
+2018-04-25 12:36:34.932 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [search], size [13], queue size [1k]
+2018-04-25 12:36:34.932 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [flush], core [1], max [4], keep alive [5m]
+2018-04-25 12:36:34.933 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [fetch_shard_store], core [1], max [16], keep alive [5m]
+2018-04-25 12:36:34.933 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [management], core [1], max [5], keep alive [5m]
+2018-04-25 12:36:34.933 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [get], size [8], queue size [1k]
+2018-04-25 12:36:34.933 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [bulk], size [8], queue size [200]
+2018-04-25 12:36:34.934 [qtp1299641336-24] DEBUG org.elasticsearch.threadpool.ThreadPool - created thread pool: name [snapshot], core [1], max [4], keep alive [5m]
+2018-04-25 12:36:34.959 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - Platform: MacOS
+2018-04-25 12:36:34.961 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: true
+2018-04-25 12:36:34.961 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent0 - sun.misc.Unsafe: unavailable (io.netty.noUnsafe)
+2018-04-25 12:36:34.961 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent0 - Java version: 8
+2018-04-25 12:36:34.962 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, int): unavailable
+2018-04-25 12:36:34.962 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.tmpdir: /var/folders/_7/cjyn7tdn1bn1rcj40bdybjlm0000gn/T (java.io.tmpdir)
+2018-04-25 12:36:34.962 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2018-04-25 12:36:34.963 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: true
+2018-04-25 12:36:34.963 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: -1 bytes
+2018-04-25 12:36:34.964 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.uninitializedArrayAllocationThreshold: -1
+2018-04-25 12:36:35.858 [qtp1299641336-24] DEBUG org.elasticsearch.client.transport.TransportClientNodesService - node_sampler_interval[5s]
+2018-04-25 12:36:35.877 [qtp1299641336-24] DEBUG io.netty.channel.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 16
+2018-04-25 12:36:35.895 [qtp1299641336-24] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.noKeySetOptimization: true
+2018-04-25 12:36:35.895 [qtp1299641336-24] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.selectorAutoRebuildThreshold: 512
+2018-04-25 12:36:35.901 [qtp1299641336-24] DEBUG io.netty.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: unavailable
+2018-04-25 12:36:35.943 [qtp1299641336-24] DEBUG org.elasticsearch.client.transport.TransportClientNodesService - adding address [{#transport#-1}{doV7-8o4Q9WYf5NTiQXFGA}{localhost}{127.0.0.1:9300}]
+2018-04-25 12:36:35.960 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.processId: 4965 (auto-detected)
+2018-04-25 12:36:35.962 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv4Stack: false
+2018-04-25 12:36:35.962 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv6Addresses: false
+2018-04-25 12:36:35.964 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.NetUtil - Loopback interface: lo0 (lo0, 0:0:0:0:0:0:0:1%lo0)
+2018-04-25 12:36:35.964 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.NetUtil - Failed to get SOMAXCONN from sysctl and file /proc/sys/net/core/somaxconn. Default: 128
+2018-04-25 12:36:35.966 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.machineId: b8:f6:b1:ff:fe:15:be:c7 (auto-detected)
+2018-04-25 12:36:35.971 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2018-04-25 12:36:35.971 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2018-04-25 12:36:35.979 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
+2018-04-25 12:36:35.979 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.maxRecords: 4
+2018-04-25 12:36:35.979 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.maxSampledRecords: 40
+2018-04-25 12:36:35.995 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numHeapArenas: 16
+2018-04-25 12:36:35.995 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numDirectArenas: 16
+2018-04-25 12:36:35.995 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.pageSize: 8192
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxOrder: 11
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.chunkSize: 16777216
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tiny

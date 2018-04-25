@@ -16,16 +16,11 @@ import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.User;
-import org.elasticsearch.index.reindex.ScrollableHitSource.Hit;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
 
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
-import com.example.jetty_jersey.model.User;
 
 
 public class MapDB implements MapDAO {
