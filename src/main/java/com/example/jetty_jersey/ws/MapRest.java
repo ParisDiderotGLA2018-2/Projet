@@ -77,8 +77,11 @@ public class MapRest {
 							@FormParam("lat") String lat,@FormParam("lng") String lng) {
 		//upload image  namemap
 		
-		//DAO.addMap(name) 
 		MMap map = new MMap(namemap, name, visib);
+		double latD = Double.parseDouble(lat);
+		double lngD = Double.parseDouble(lng);
+		Location loc = new Location(place,latD,lngD,tag,msg,"");
+		map.setLocation(loc);
 		MapDB mdb = new MapDB();
 		mdb.addMap(map);
 		System.out.println(name+" : "+namemap+","+visib+","+place+","+lat+","+lng+","+tag+","+msg);
