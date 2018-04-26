@@ -84,7 +84,7 @@ public class MapRest {
 		map.setLocation(loc);
 		MapDB mdb = new MapDB();
 		mdb.addMap(map);
-		System.out.println(name+" : "+namemap+","+visib+","+place+","+lat+","+lng+","+tag+","+msg);
+		//System.out.println(name+" : "+namemap+","+visib+","+place+","+lat+","+lng+","+tag+","+msg);
 		try {
 			URI location = new URI("http://localhost:8088/index.html");
 			return Response.seeOther(location).entity("map").build();
@@ -101,8 +101,9 @@ public class MapRest {
 	public MMap infoLocation(@PathParam("name") String name,
 			@PathParam("namemap") String namemap,
 			@PathParam("place") String place) {
-		//DAO.getMap(name,namemap,place)
-		return new MMap("PARIS",name,"public");
+		MapDB mdb = new MapDB();
+		return mdb.infoLocation(name, namemap, place);
+		//return new MMap("PARIS",name,"public");
 	}
 	
 	

@@ -17,7 +17,13 @@ public class MMap {
 		this.creator=creator;
 		this.location= new ArrayList<Location>();
 		this.visibilite=visibilite;
-
+	}
+	
+	public MMap(String name,String creator,String visibilite, ArrayList<Location> location) {
+		this.name = name;
+		this.creator=creator;
+		this.location= location;
+		this.visibilite=visibilite;
 	}
 
 	public void setLocation(Location l) {
