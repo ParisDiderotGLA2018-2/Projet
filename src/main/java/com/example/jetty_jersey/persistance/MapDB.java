@@ -144,12 +144,16 @@ public  MMap[] getMaps(User U) {
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
-			String location = (String) hit.getSourceAsMap().get("location");
+			//String location = (String) hit.getSourceAsMap().get("location");
 			String name = (String) hit.getSourceAsMap().get("name");
-			String visibilité = (String) hit.getSourceAsMap().get("visibilite");
+			//String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 			tab.add(name);
 		}
-		return (String[]) tab.toArray();
+		String  [] tab2 = new String  [tab.size()]; 
+		for(int i = 0; i < tab.size(); i++){
+			tab2[i] = tab.get(i);
+		}
+		return tab2;
 	}
 
 	public MMap InfoLocation(String login, String mapName, String mapPlace) {
@@ -165,8 +169,8 @@ public  MMap[] getMaps(User U) {
 			SearchHit hit = hitTab[0];
 			String location = (String) hit.getSourceAsMap().get("location");
 			String name = (String) hit.getSourceAsMap().get("name");
-			String visibilité = (String) hit.getSourceAsMap().get("visibilite");
-			return new MMap(mapName,new User(login,null),visibilité);
+			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
+			return new MMap(mapName,new User(login,null),visibilite);
 			
 			//TODO SET LOCATION 
 		}
