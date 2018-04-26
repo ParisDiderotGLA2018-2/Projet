@@ -135,36 +135,22 @@ public  MMap[] getMaps(String creator) {
 		}
 	}
 
-
-<<<<<<< HEAD
 	public String[] getListMapName(String login) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
         .setQuery(QueryBuilders.matchPhraseQuery("creator", login))
-=======
-	public String[] getListMapName(String name) {
-		TransportClient client = Bdd.connectionToBD();
-		SearchResponse response = client.prepareSearch("map")
-        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-        .setQuery(QueryBuilders.matchPhraseQuery("creator", name))
->>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
         .get();
 		ArrayList<String> tab =new ArrayList<String>();
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
-<<<<<<< HEAD
-			String name = (String) hit.getSourceAsMap().get("name");
-			tab.add(name);
-=======
 			//String location = (String) hit.getSourceAsMap().get("location");
 			String nameMap = (String) hit.getSourceAsMap().get("name");
 			if(!tab.contains(nameMap)) {
 				//String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 				tab.add(nameMap);
 			}
->>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
 		}
 		String  [] tab2 = new String  [tab.size()+1];
 		for(int i = 0; i < tab2.length-1; i++){
@@ -199,14 +185,9 @@ public  MMap[] getMaps(String creator) {
 	public void deletePlace(MMap instance, Location l) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
-        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-<<<<<<< HEAD
-        
+        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)     
         .setQuery(QueryBuilders.multiMatchQuery("place",l.place)) // a tester
-=======
-
         .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
->>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
