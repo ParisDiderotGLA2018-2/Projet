@@ -77,7 +77,7 @@ public class MapRest {
 		System.out.println(name+" : "+namemap+","+visib+","+place+","+lat+","+lng+","+tag+","+msg);
 		try {
 			URI location = new URI("http://localhost:8088/index.html");
-			return Response.seeOther(location).build();
+			return Response.seeOther(location).entity("map").build();
 		} catch (URISyntaxException e) {
 	        e.printStackTrace();
 	    }
@@ -107,7 +107,7 @@ public class MapRest {
 		//DAO.updateMap(name,namemap,place,tag,visib,msg)
 		try {
 			URI location = new URI("http://localhost:8088/index.html");
-		       return Response.seeOther(location).build();
+		       return Response.seeOther(location).entity("map").build();
 			} catch (URISyntaxException e) {
 		        e.printStackTrace();
 		    }
@@ -123,7 +123,7 @@ public class MapRest {
 			//DAO.deleteMap(name,namemap,place)
 			try {
 				URI location = new URI("http://localhost:8088/index.html");
-			       return Response.seeOther(location).build();
+			       return Response.seeOther(location).entity("map").build();
 				} catch (URISyntaxException e) {
 			        e.printStackTrace();
 			    }
