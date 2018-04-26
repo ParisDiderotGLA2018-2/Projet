@@ -17,14 +17,23 @@ public class Test {
 		logger.debug("Test app start");
 		//	insert_user_test();
 		//	update_user_test();
-		insert_map_test();
-		get_map_test();
+		//insert_map_test();
+		//get_map_test();
+		//delete_map_test();
+		//insert_location_test();
 		logger.debug("end");
 		//Bdd.disconnect();
 	}
 	public static void get_map_test(){
 		System.out.println("Test get map");
-		db.getMaps(U);
+		MMap  [] m= db.getMaps(U);
+		System.out.println(m[0].name);
+
+	}
+	public static void delete_map_test(){
+		System.out.println("Test delete map");
+		db.deleteMap(new MMap("IFNI",U,"public"));
+		System.out.println("fin de test");
 
 	}
 	public static void insert_location_test(){
@@ -34,7 +43,7 @@ public class Test {
 		Location loc4 = new Location("...blablo...",41.38773117668287,2.201385498046875,"IKAN",".............................","img/plage2.jpg");
 
 		try {
-			db.addLocation(loc1);
+			db.addLocation("3",loc1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
