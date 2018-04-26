@@ -18,6 +18,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
+import org.elasticsearch.index.search.MultiMatchQuery.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
 
 import com.example.jetty_jersey.model.User;
@@ -134,19 +135,17 @@ public  MMap[] getMaps(User U) {
 	}
 
 
-	public String[] getListMapName(User U) {
+	public String[] getListMapName(String login) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-        .setQuery(QueryBuilders.matchPhraseQuery("creator", U.login))
+        .setQuery(QueryBuilders.matchPhraseQuery("creator", login))
         .get();
 		ArrayList<String> tab =new ArrayList<String>();		 
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
-			//String location = (String) hit.getSourceAsMap().get("location");
 			String name = (String) hit.getSourceAsMap().get("name");
-			//String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 			tab.add(name);
 		}
 		String  [] tab2 = new String  [tab.size()]; 
@@ -183,7 +182,7 @@ public  MMap[] getMaps(User U) {
 		SearchResponse response = client.prepareSearch("location")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
         
-        .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
+        .setQuery(QueryBuilders.multiMatchQuery("place",l.place)) // a tester
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
@@ -194,7 +193,7 @@ public  MMap[] getMaps(User U) {
  
 		}
 		else{
-			System.out.println("Aucune map trouve");
+			System.out.println("Aucune location trouve");
 		}
 	}
 
@@ -216,6 +215,11 @@ public  MMap[] getMaps(User U) {
 		else{
 			System.out.println("Aucune map trouve");
 		}
+	}
+
+	public String[] getListMapName(User U) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
