@@ -34,39 +34,28 @@ http://www.templatemo.com/tm-511-journey
                 <div class="container">
                     <div class="row">
                         <nav class="navbar navbar-expand-lg narbar-light">
-                            <a class="navbar-brand mr-auto" href="#tm-section-0">
+                            <a class="navbar-brand mr-auto" href="#tm-section-0" >
                                 <img src="img/logo.png" alt="Site logo">
                                 MAPS Event
                             </a>
-                            <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            
-                           
-                                <ul class="navbar-nav ml-auto">
-                                 <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
-                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-                                        
-                                       <input name="destination" type="text" class="form-control" id="btnSearchfrd" placeholder="Name ...">
-                                   
-                                       
-                                    </div>
+                        <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Logout</a>
                                 </li>
                             </ul>
                              
-
-                </div>
-                        </div>                            
-                    </nav>
+                        </nav>
+                                             
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- .tm-top-bar -->
+      </div>  
 
         <div class="tm-page-wrap mx-auto">
             <div class="tm-container-outer tm-position-relative" id="tm-section-0">
                       
+
+
                 
                 <div class="col-xs-8 mx-auto tm-about-text-wrap text-center" id="Xmap">     
                     <button  type="button" class="btn btn-primary" id="btnmymap">My Maps</button>
@@ -88,7 +77,7 @@ http://www.templatemo.com/tm-511-journey
                 <div class="col-xs-12 mx-auto tm-about-text-wrap " id="btnmymapshow"> 
                     
                     <button onclick="setNewMap();" type="submit" class="btn btn-primary tm-btn-search " id="btnadd">Add map/place</button>
-                    <button onclick="updateMap();" type="submit" class="btn btn-primary tm-btn-search " id="btnupdate">Update place</button>
+                    <button onclick="update();" type="submit" class="btn btn-primary tm-btn-search " id="btnupdate">Update place</button>
                     <button onclick="deleteMarker();" type="submit" class="btn btn-primary tm-btn-search " id="btndelete">Delete place</button>
                     
                 </div>
@@ -294,10 +283,10 @@ http://www.templatemo.com/tm-511-journey
             var pickerCheckOut = datepicker('#inputCheckOut');
 
             // Update nav links on scroll
-            $('#tm-top-bar').singlePageNav({
+           /* $('#tm-top-bar').singlePageNav({
                 currentClass:'active',
                 offset: 60
-            });
+            });*/
 
             // Close navbar after clicked
             $('.nav-link').click(function(){
@@ -305,12 +294,12 @@ http://www.templatemo.com/tm-511-journey
             });
 
             // Slick Carousel
-            $('.tm-slideshow').slick({
+            /*$('.tm-slideshow').slick({
                 infinite: true,
                 arrows: true,
                 slidesToShow: 1,
                 slidesToScroll: 1
-            });
+            });*/
 
                                                       
             $('.tm-current-year').text(new Date().getFullYear());  //Update year in copyright           
@@ -320,18 +309,84 @@ http://www.templatemo.com/tm-511-journey
     </script>             
 
 
-          <script id="location_window_info" type="text/template">
-              <div id="detail" class="info-window">
-                  <div class="info-content">
-                 <h2> <%= name %> </h2>
-                 <h3> <%= place %> </h3>
-                 <p> <%= msg %> </p>
-                 <div class="tm-slideshow">
-                 <img src = <%= filename %>  alt="Image" >
-                 </div>
-                 </div>
-                 </div>
-          </script>
+    <script id="location_window_info" type="text/template">
+        <div id="detail" class="info-window">
+            <div class="info-content">
+             <h2> <%= name %> </h2>
+             <h3> <%= place %> </h3>
+             <p> <%= msg %> </p>
+             <div class="tm-slideshow">
+                <img src = <%= filename %>  alt="Image" >
+            </div>
+            </div>
+            
+         </div>
+  </script>
+
+  <script  id="setMMap" type="text/template">
+      <div class="info-window">
+        <div class="info-content">
+        
+        <form action="ws/index/khawla/addMapOrPlace" method="POST">
+        <label>My map </label>
+            <select name="map" id="smap" onchange="change_valeur();">
+            <option value=""></option>'
+            <%= d %>
+            </select><br/>
+            <label>map\'s name</label>
+              <input type="text" name="namemap" id="sname" ><br>
+              <label>tag</label>
+              <input type="text" name="tag"><br>
+              <label>place name</label>
+              <input type="text" name="place" ><br>
+              <input type="text" name="lat"  value= "<%= lat %>" >
+              <input type="text" name="lng"  value= "<%= lng %>" ><br/>
+              <label>description </label>
+              <textarea name="msg" rows="2" cols="30"></textarea></br>
+              <label>upload picture</label>
+              <input type="file" id=""></br>
+              <select name="visib">
+            <option value="public">Public</option>
+            <option value="friend">Friend</option>
+            <option value="private">Private</option>
+            </select><br/>
+            <button type="submit" class="btn btn-primary tm-btn-search " id="setNewmap">Submit</button>
+            </form>
+        </div>
+        </div>
+  </script>
+
+  
+  <script id="updateMMap" type="text/template">
+      
+    <div class="info-window">
+        <div class="info-content">
+        <form action="ws/index/khawla/<%= name %>/update" method="POST">
+        <label>My map </label>
+            <select name="map">
+            <option value=""><%= name %></option>
+            </select><br/>
+            <label>map\'s name</label>
+              <input type="text" name="namemap"  value="<%= name %>"><br>
+              <label>tag</label>
+              <input type="text" name="tag" value=""><br>
+              <label>place name</label>
+              <input type="text" name="place" value="<%= place %>"><br>
+              <label>description </label>
+              <textarea rows="2" cols="30" name="msg"><%= msg %></textarea></br>
+              <label>upload picture</label>
+              <input type="text" id="myFile" value=" <%= filename %>" ></br>
+              <input type="text" id="" value="<%= visibilite %>"></br>
+              <select name="visibilite">
+            <option value="">Public</option>
+              <option value="">Friend</option>
+            <option value="">Private</option>
+            </select><br/>
+              <button type="submit" class="btn btn-primary tm-btn-search " id="updateOldMap">Submit</button>
+            </form>
+        </div> 
+        </div>
+  </script>
 
 </body>
 </html>
