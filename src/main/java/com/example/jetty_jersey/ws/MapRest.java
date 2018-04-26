@@ -1,6 +1,8 @@
 package com.example.jetty_jersey.ws;
 
 import com.example.jetty_jersey.model.*;
+import com.example.jetty_jersey.persistance.MapDB;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,9 +56,10 @@ public class MapRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String [] getlistMapName(@PathParam("name") String name) {
-		//nbr location ici 4	
-		//DAO.getlistMap(name)
-		String [] s= {"PARIS","IFNI","4"};
+		//nbr location ici 4
+		MapDB mdb = new MapDB();
+		String[] s = mdb.getListMapName(name);
+		//String [] s= {"PARIS","IFNI","4"};
 		return s;
 	}
 	
