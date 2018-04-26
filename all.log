@@ -51,4 +51,69 @@
 2018-04-25 12:36:35.995 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.pageSize: 8192
 2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxOrder: 11
 2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.chunkSize: 16777216
-2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tiny
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tinyCacheSize: 512
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.smallCacheSize: 256
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.normalCacheSize: 64
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimInterval: 8192
+2018-04-25 12:36:35.996 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.useCacheForAllThreads: true
+2018-04-25 12:36:36.004 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: pooled
+2018-04-25 12:36:36.004 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 65536
+2018-04-25 12:36:36.004 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2018-04-25 12:36:36.037 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.bytebuf.checkAccessible: true
+2018-04-25 12:36:36.038 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@19f5cb57
+2018-04-25 12:36:36.043 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: disabled
+2018-04-25 12:36:36.043 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxSharedCapacityFactor: disabled
+2018-04-25 12:36:36.043 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.linkCapacity: disabled
+2018-04-25 12:36:36.043 [elasticsearch[_client_][management][T#1]] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: disabled
+2018-04-25 12:36:36.142 [qtp1299641336-24] DEBUG org.elasticsearch.transport.netty4.Netty4Transport - connected to node [{Y5M3upT}{Y5M3upTRROCYY0MIk7c7sw}{TIR1fC73QGOpIstpjz9zmQ}{127.0.0.1}{127.0.0.1:9300}]
+2018-04-26 12:10:08.391 [elasticsearch[_client_][management][T#2]] DEBUG org.elasticsearch.client.transport.TransportClientNodesService - failed to connect to node [{#transport#-1}{doV7-8o4Q9WYf5NTiQXFGA}{localhost}{127.0.0.1:9300}], ignoring...
+org.elasticsearch.transport.ConnectTransportException: [][127.0.0.1:9300] connect_exception
+	at org.elasticsearch.transport.TcpChannel.awaitConnected(TcpChannel.java:165) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TcpTransport.openConnection(TcpTransport.java:616) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TcpTransport.openConnection(TcpTransport.java:122) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TransportService.openConnection(TransportService.java:350) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler$1.doRun(TransportClientNodesService.java:506) [elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:672) [elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-6.2.2.jar:6.2.2]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_161]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_161]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: localhost/127.0.0.1:9300
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_161]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[?:1.8.0_161]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:323) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:633) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysPlain(NioEventLoop.java:545) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) ~[netty-common-4.1.16.Final.jar:4.1.16.Final]
+	... 1 more
+Caused by: java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_161]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[?:1.8.0_161]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:323) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:633) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysPlain(NioEventLoop.java:545) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459) ~[netty-transport-4.1.16.Final.jar:4.1.16.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) ~[netty-common-4.1.16.Final.jar:4.1.16.Final]
+	... 1 more
+2018-04-26 12:10:08.391 [elasticsearch[_client_][management][T#1]] DEBUG org.elasticsearch.client.transport.TransportClientNodesService - failed to connect to node [{Y5M3upT}{Y5M3upTRROCYY0MIk7c7sw}{TIR1fC73QGOpIstpjz9zmQ}{127.0.0.1}{127.0.0.1:9300}], ignoring...
+org.elasticsearch.transport.ConnectTransportException: [Y5M3upT][127.0.0.1:9300] connect_exception
+	at org.elasticsearch.transport.TcpChannel.awaitConnected(TcpChannel.java:165) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TcpTransport.openConnection(TcpTransport.java:616) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TcpTransport.openConnection(TcpTransport.java:122) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.transport.TransportService.openConnection(TransportService.java:350) ~[elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler$1.doRun(TransportClientNodesService.java:506) [elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:672) [elasticsearch-6.2.2.jar:6.2.2]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-6.2.2.jar:6.2.2]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_161]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_161]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 127.0.0.1/127.0.0.1:9300
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[?:1.8.0_161]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[?:1.8.0_161]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChann
