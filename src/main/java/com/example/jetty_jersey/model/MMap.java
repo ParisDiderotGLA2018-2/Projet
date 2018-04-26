@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class MMap {
 	
 	public String name;
-	public User creator;
+	public String creator;
 	public ArrayList<Location> location;
 	public String visibilite;
 
 	// constructors
 
 
-	public MMap(String name,User U,String visibilite) {
+	public MMap(String name,String creator,String visibilite) {
 		this.name = name;
-		this.creator=U;
+		this.creator=creator;
 		this.location= new ArrayList<Location>();
 		this.visibilite=visibilite;
 

@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response.Status;
 import com.example.jetty_jersey.model.*;
 import com.example.jetty_jersey.persistance.*;
 
-@Path("/index")
+@Path("/index1")
 public class UserRest {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

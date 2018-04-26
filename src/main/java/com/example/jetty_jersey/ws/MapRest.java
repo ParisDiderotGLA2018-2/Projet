@@ -35,19 +35,19 @@ public class MapRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public MMap[] getMap(@PathParam( "name" ) String name) {
 		System.out.println("name ="+name);
-		User U = new User("bla","blo");
-		Location loc1 = new Location("Eiffel Tower",48.8583905296204,2.2944259643554688,"IKAN","the view from the topis just breathtaking","img/paris1.jpg");
+		/*Location loc1 = new Location("Eiffel Tower",48.8583905296204,2.2944259643554688,"IKAN","the view from the topis just breathtaking","img/paris1.jpg");
 		Location loc2 = new Location("...IKHAN...",48.87386089807715,2.294940948486328,"IKAN",".............................","img/paris2.jpg");
 		Location loc3 = new Location("blablo",48.8386053,2.378623100000027,"IKAN","the view from the topis just breathtaking","img/plage1.jpg");
 		Location loc4 = new Location("...blablo...",41.38773117668287,2.201385498046875,"IKAN",".............................","img/plage2.jpg");
 		
-		MMap [] mp= {new MMap("PARIS",U,"public"),new MMap("IFNI",U,"public")};
+		MMap [] mp= {new MMap("PARIS",name,"public"),new MMap("IFNI",name,"public")};
 		mp[0].setLocation(loc1);
 		mp[0].setLocation(loc2);
 		mp[1].setLocation(loc3);
-		mp[1].setLocation(loc4);
-		//return M.getMaps(name);
-		return mp;
+		mp[1].setLocation(loc4);*/
+		MapDB mdb = new MapDB();
+		return mdb.getMaps(name);
+		//return mp;
 	}
 	
 	
@@ -59,6 +59,10 @@ public class MapRest {
 		//nbr location ici 4
 		MapDB mdb = new MapDB();
 		String[] s = mdb.getListMapName(name);
+		if(s.length == 0) {
+			String[] s2 = {"0"};
+			return s2;
+		}
 		//String [] s= {"PARIS","IFNI","4"};
 		return s;
 	}
@@ -74,6 +78,9 @@ public class MapRest {
 		//upload image  namemap
 		
 		//DAO.addMap(name) 
+		MMap map = new MMap(namemap, name, visib);
+		MapDB mdb = new MapDB();
+		mdb.addMap(map);
 		System.out.println(name+" : "+namemap+","+visib+","+place+","+lat+","+lng+","+tag+","+msg);
 		try {
 			URI location = new URI("http://localhost:8088/index.html");
@@ -88,19 +95,18 @@ public class MapRest {
 	@Path("/{name}/{namemap}/{place}/info")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public MMap InfoLocation(@PathParam("name") String name,
+	public MMap infoLocation(@PathParam("name") String name,
 			@PathParam("namemap") String namemap,
 			@PathParam("place") String place) {
 		//DAO.getMap(name,namemap,place)
-		User U = new User(name,"pass");
-		return new MMap("PARIS",U,"public");
+		return new MMap("PARIS",name,"public");
 	}
 	
 	
 	@POST
 	@Path("/{name}/{namemap}/{place}/update")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response UpdateMap(@PathParam("name") String name,
+	public Response updateMap(@PathParam("name") String name,
 			@PathParam("namemap") String namemap,
 			@PathParam("place") String place,@FormParam("tag") String tag,
 			@FormParam("msg") String msg,@FormParam("visib") String visib) {
