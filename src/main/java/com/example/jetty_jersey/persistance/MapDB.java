@@ -1,37 +1,37 @@
 package com.example.jetty_jersey.persistance;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.document.DocumentField;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-import org.elasticsearch.action.search.MultiSearchResponse;
-import org.elasticsearch.action.search.SearchRequestBuilder;
+
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.reindex.BulkByScrollResponse;
-import org.elasticsearch.index.reindex.UpdateByQueryAction;
-import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
-import org.elasticsearch.index.search.MultiMatchQuery.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
 
-import com.example.jetty_jersey.model.User;
 
+import com.example.jetty_jersey.model.User;
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
 
 
 public class MapDB implements MapDAO {
+    private static final Logger logger = LogManager.getLogger(MapDB.class);
 
 
-	/*
-	 *
+	/* Rappel des champs utiliser : 
+	 * MAP : 
+	 * 	public String name;
+		public User creator;
+		public ArrayList<Location> location;
+		public String visibilite;
 	 * Location :
 	 * 	public String place;
 		public double lat;
@@ -72,7 +72,7 @@ public  MMap[] getMaps(String creator) {
 	for(int i = 0; i < hitTab.length ; i++) {
 		SearchHit hit = hitTab[i];
 		String location = (String) hit.getSourceAsMap().get("location");
-		System.out.println("location id : " + location);
+		logger.debug("location id : " + location);
 		String name = (String) hit.getSourceAsMap().get("name");
 		String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 		tab.add(new MMap(name,creator,visibilite));
@@ -83,39 +83,6 @@ public  MMap[] getMaps(String creator) {
 	}
 	return tab2;
 }
-	/*TransportClient client = Bdd.connectionToBD();
-		System.out.println("get maps");
-		SearchRequestBuilder srb2 = client
-			    .prepareSearch().setQuery(QueryBuilders.matchQuery("creator", u.login )).setSize(1);
-		MultiSearchResponse sr = client.prepareMultiSearch()
-				.add(srb2)
-				.get();
-		for(MultiSearchResponse.Item item : sr.getResponses()){
-			SearchResponse response = item.getResponse();
-			SearchHit[] hits = response.getHits().getHits();
-			for (SearchHit hit : hits) {
-				String tag = (String) hit.getSourceAsMap().get("tag");
-				System.out.println(tag);
-				/*Map<String, DocumentField> reponseFields = hits.getAt(i).getFields();
-				DocumentField d = reponseFields.get("place");
-				String place = d.getValue();
-				System.out.println(item.toString());
-
-			}
-		}
-		return null;
-	}
-*/
-
-
-	/*
-	 * 	public String name;
-		public User creator;
-		public ArrayList<Location> location;
-		public String visibilite;
-	 * (non-Javadoc)
-	 * @see persistance.MapDAO#addMap(com.example.jetty_jersey.model.MMap)
-	 */
 	public void addMap(MMap instance) {
 		TransportClient client = Bdd.connectionToBD();
 		try {
@@ -125,10 +92,16 @@ public  MMap[] getMaps(String creator) {
 			                        .field("name", instance.name)
 			                        .field("creator", instance.creator)
 			                        .field("location", "id" )
-			                        .field("visibilite", instance.visibilite )
+			                        .field("visibilite", instance.visibilite)
 			                    .endObject()
 			                  )
 			        .get();
+			String _id = response.getId();
+			ArrayList<Location> ll = instance.location;
+			for(Location tmpL : ll){
+				this.addLocation(_id, tmpL);
+			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,10 +118,8 @@ public  MMap[] getMaps(String creator) {
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
-			//String location = (String) hit.getSourceAsMap().get("location");
 			String nameMap = (String) hit.getSourceAsMap().get("name");
 			if(!tab.contains(nameMap)) {
-				//String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 				tab.add(nameMap);
 			}
 		}
@@ -159,9 +130,35 @@ public  MMap[] getMaps(String creator) {
 		tab2[tab2.length-1] = Integer.toString(hitTab.length);
 		return tab2;
 	}
-
+	public Location getLocation (String id, String place){
+		TransportClient client = Bdd.connectionToBD();
+		SearchResponse response = client.prepareSearch("map")
+				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+				.setQuery(QueryBuilders.matchPhraseQuery("idMap",id )) // rajouter le createur
+        .get();
+		
+		SearchHit[] hitTab = response.getHits().getHits();
+		
+		if(hitTab.length != 0) {
+			for(int i = 0; i < hitTab.length; i++){
+				SearchHit hit = hitTab[i];
+				String placetmp = (String) hit.getSourceAsMap().get("place");
+				if(placetmp.equals(place)){
+					double lat = Double.parseDouble((String) hit.getSourceAsMap().get("lat"));
+					double lng = Double.parseDouble((String) hit.getSourceAsMap().get("lng"));
+					String tag = (String) hit.getSourceAsMap().get("tag");
+					String msg = (String) hit.getSourceAsMap().get("msg");
+					String filename = (String) hit.getSourceAsMap().get("filename");
+					return new Location (place,lat,lng,tag,msg,filename);
+				}
+			}
+		}else{
+			logger.debug("get location :. impossible de trouver la location");
+			return null;
+		}
+		return null;
+	}
 	public MMap InfoLocation(String login, String mapName, String mapPlace) {
-		// TODO Auto-generated method stub
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
@@ -171,13 +168,16 @@ public  MMap[] getMaps(String creator) {
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
-			String location = (String) hit.getSourceAsMap().get("location");
-			String name = (String) hit.getSourceAsMap().get("name");
+			String id = hit.getId();
 			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-			return new MMap(mapName,login,visibilite);
-
-			//TODO SET LOCATION
+			Location l =this.getLocation(id, mapPlace);
+			MMap m = new MMap(mapName,login,visibilite);
+			m.setLocation(l);
+			return m ;
+		}else{
+			System.out.println("Aucune Location a été touvé");
 		}
+		logger.debug("attention l'argument de MMap est null");
 		return null;
 
 	}
@@ -186,8 +186,8 @@ public  MMap[] getMaps(String creator) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)     
-        .setQuery(QueryBuilders.multiMatchQuery("place",l.place)) // a tester
-        .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
+        //.setQuery(QueryBuilders.multiMatchQuery("place",l.place), (name,instance.name)) // a tester
+        .setQuery(QueryBuilders.matchPhraseQuery("place", l.place))
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
@@ -221,10 +221,4 @@ public  MMap[] getMaps(String creator) {
 			System.out.println("Aucune map trouve");
 		}
 	}
-
-	public String[] getListMapName(User U) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
