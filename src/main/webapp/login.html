@@ -69,7 +69,7 @@ http://www.templatemo.com/tm-511-journey
                         </div> <!-- row -->
                         <div class="row tm-banner-row" id="tm-section-search">
                             
-                            <form class="tm-search-form tm-section-pad-2" action="ws/index" method="GET">
+                            <form class="tm-search-form tm-section-pad-2" action="ws/index1" method="GET">
                                 <p id="erreur" style="background-color:#ff0000"></p>
                                 <div class="form-row tm-search-form-row">                                
                                     <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
@@ -89,9 +89,7 @@ http://www.templatemo.com/tm-511-journey
                                         <label for="loginbtn">&nbsp;</label>
                                         
                                         <button type="submit" class="btn btn-primary tm-btn tm-btn-search " id="loginbtn">Log in</button>
-                                        <!--
-                                        <input type="submit" class="btn btn-primary tm-btn tm-btn-search " id="loginbtn" value="log in">
-                                        -->
+                                        
                                     </div>
                                 </div>                              
                             </form>      
@@ -116,7 +114,7 @@ http://www.templatemo.com/tm-511-journey
                         </div> <!-- row -->
                         <div class="row tm-banner-row" id="tm-section-search">
                            
-                            <form class="tm-search-form tm-section-pad-2" action="ws/index" method="POST">
+                            <form class="tm-search-form tm-section-pad-2" action="ws/index1" method="POST">
                                 <div class="form-row tm-search-form-row">                                
                                     <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
                                         <label for="username"></label>
@@ -176,44 +174,6 @@ http://www.templatemo.com/tm-511-journey
       
     <script type="text/javascript">
 
-
-   
-function callDone(result){
-   
-       
-        var  sr="200";
-
-        sr=JSON.stringify(result);
-
-        console.log(sr);
-    
-    //$("#result").append(sr);
-
-    if(sr == "200"){
-            window.location = "http://localhost:8088/index.html";
-            
-        }else{
-            document.getElementById("erreur").innerHTML = "Login/Password authentification failed";   
-        }
-}
-
-$(function(){
-    $("#signupbtn").click(function(){
-        getServerData("ws/index",callDone);
-    });
-
-
-    $("#loginbtn").click(function(){
-        //getServerData("ws/index",callDone);
-    });
-
-
-       
-});
-
-        
-
-        
     </script>  
 </body>
 </html>

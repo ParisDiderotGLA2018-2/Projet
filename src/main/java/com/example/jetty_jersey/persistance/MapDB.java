@@ -60,23 +60,24 @@ public class MapDB implements MapDAO {
 
 	}
 
-public  MMap[] getMaps(User U) {
+public  MMap[] getMaps(String creator) {
 
 	TransportClient client = Bdd.connectionToBD();
 	SearchResponse response = client.prepareSearch("map")
     .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-    .setQuery(QueryBuilders.matchPhraseQuery("creator", U.login))
+    .setQuery(QueryBuilders.matchPhraseQuery("creator", creator))
     .get();
-	ArrayList<MMap> tab =new ArrayList<MMap>();		 
+	ArrayList<MMap> tab =new ArrayList<MMap>();
 	SearchHit[] hitTab = response.getHits().getHits();
 	for(int i = 0; i < hitTab.length ; i++) {
 		SearchHit hit = hitTab[i];
 		String location = (String) hit.getSourceAsMap().get("location");
+		System.out.println("location id : " + location);
 		String name = (String) hit.getSourceAsMap().get("name");
 		String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-		tab.add(new MMap(name,U,visibilite));
+		tab.add(new MMap(name,creator,visibilite));
 	}
-	MMap  [] tab2 = new MMap  [tab.size()]; 
+	MMap  [] tab2 = new MMap  [tab.size()];
 	for(int i = 0; i < tab.size(); i++){
 		tab2[i] = tab.get(i);
 	}
@@ -105,7 +106,7 @@ public  MMap[] getMaps(User U) {
 		return null;
 	}
 */
-	
+
 
 	/*
 	 * 	public String name;
@@ -122,7 +123,7 @@ public  MMap[] getMaps(User U) {
 			        .setSource(jsonBuilder()
 			                    .startObject()
 			                        .field("name", instance.name)
-			                        .field("creator", instance.creator.login)
+			                        .field("creator", instance.creator)
 			                        .field("location", "id" )
 			                        .field("visibilite", instance.visibilite )
 			                    .endObject()
@@ -135,23 +136,41 @@ public  MMap[] getMaps(User U) {
 	}
 
 
+<<<<<<< HEAD
 	public String[] getListMapName(String login) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
         .setQuery(QueryBuilders.matchPhraseQuery("creator", login))
+=======
+	public String[] getListMapName(String name) {
+		TransportClient client = Bdd.connectionToBD();
+		SearchResponse response = client.prepareSearch("map")
+        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+        .setQuery(QueryBuilders.matchPhraseQuery("creator", name))
+>>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
         .get();
-		ArrayList<String> tab =new ArrayList<String>();		 
+		ArrayList<String> tab =new ArrayList<String>();
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
+<<<<<<< HEAD
 			String name = (String) hit.getSourceAsMap().get("name");
 			tab.add(name);
+=======
+			//String location = (String) hit.getSourceAsMap().get("location");
+			String nameMap = (String) hit.getSourceAsMap().get("name");
+			if(!tab.contains(nameMap)) {
+				//String visibilite = (String) hit.getSourceAsMap().get("visibilite");
+				tab.add(nameMap);
+			}
+>>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
 		}
-		String  [] tab2 = new String  [tab.size()]; 
-		for(int i = 0; i < tab.size(); i++){
+		String  [] tab2 = new String  [tab.size()+1];
+		for(int i = 0; i < tab2.length-1; i++){
 			tab2[i] = tab.get(i);
 		}
+		tab2[tab2.length-1] = Integer.toString(hitTab.length);
 		return tab2;
 	}
 
@@ -162,35 +181,40 @@ public  MMap[] getMaps(User U) {
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
         .setQuery(QueryBuilders.matchPhraseQuery("name", mapName)) // rajouter le createur
         .get();
-				 
+
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String location = (String) hit.getSourceAsMap().get("location");
 			String name = (String) hit.getSourceAsMap().get("name");
 			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-			return new MMap(mapName,new User(login,null),visibilite);
-			
-			//TODO SET LOCATION 
+			return new MMap(mapName,login,visibilite);
+
+			//TODO SET LOCATION
 		}
 		return null;
-		
+
 	}
 
 	public void deletePlace(MMap instance, Location l) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+<<<<<<< HEAD
         
         .setQuery(QueryBuilders.multiMatchQuery("place",l.place)) // a tester
+=======
+
+        .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
+>>>>>>> a3a0774b1474a7e692895adec5ad7d7345d5730c
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
 			System.out.println(id);
-			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();		
- 
+			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
+
 		}
 		else{
 			System.out.println("Aucune location trouve");
@@ -201,7 +225,7 @@ public  MMap[] getMaps(User U) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-        
+
         .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
@@ -209,8 +233,8 @@ public  MMap[] getMaps(User U) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
 			System.out.println(id);
-			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();		
- 
+			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
+
 		}
 		else{
 			System.out.println("Aucune map trouve");

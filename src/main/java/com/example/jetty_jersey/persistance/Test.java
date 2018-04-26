@@ -26,13 +26,13 @@ public class Test {
 	}
 	public static void get_map_test(){
 		System.out.println("Test get map");
-		MMap  [] m= db.getMaps(U);
+		MMap  [] m= db.getMaps(U.login);
 		System.out.println(m[0].name);
 
 	}
 	public static void delete_map_test(){
 		System.out.println("Test delete map");
-		db.deleteMap(new MMap("IFNI",U,"public"));
+		db.deleteMap(new MMap("IFNI",U.login,"public"));
 		System.out.println("fin de test");
 
 	}
@@ -50,7 +50,7 @@ public class Test {
 		}
 	}
 	public static void insert_map_test(){
-		MMap [] mp= {new MMap("PARIS",U,"public"),new MMap("IFNI",U,"public")};
+		MMap [] mp= {new MMap("PARIS",U.login,"public"),new MMap("IFNI",U.login,"public")};
 		System.out.println("add map");
 		db.addMap(mp[1]);
 	}

@@ -4,8 +4,8 @@ import com.example.jetty_jersey.model.*;
 
 interface MapDAO {
 	//which user
-	MMap[] getMaps(User U);
-	String[] getListMapName(User U);
+	MMap[] getMaps(String creator);
+	String[] getListMapName(String name);
 	
 	// Donne les infos d'un lieu. 
 	//Le type de retour est map pour renvoyer aussi le nom de la map
