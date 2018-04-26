@@ -1,0 +1,40 @@
+{
+    "mappings" : {
+        "user" : {
+            "properties" : {
+                "username" : { "type" : "text" },
+                "password" : {"type" : "text"}
+            }
+        },
+        "map" : {
+            "properties" : {
+                "name" :  { "type" : "text"},
+                "creator" : {"type": "text"},
+                "location" : {"type" : "text"},
+                "visibilite" : {"type" : "text"}
+            }
+        },
+        "location" : {
+            "properties" : {
+                "idMap" : {"type" : "text"},
+                "place" : {"type" : "text"},
+                "lat" : {"type" : "text"},
+                "lng" : {"type" : "text"},
+                "tag" : {"type" : "text"},
+                "message" : {"type" : "text"},
+                "filename"  : {"type" : "text"}
+            }
+        },
+        "tag" : {
+            "properties" : {
+                "idLocation" : {"type" : "text"},
+                "contenu" : {"type" : "text"}
+            }
+        },
+        "message" : {
+            "properties" : {
+                "idLocation": {"type" : "text"},
+                "contenu" : {"type" : "text"}
+        }
+      }
+}
