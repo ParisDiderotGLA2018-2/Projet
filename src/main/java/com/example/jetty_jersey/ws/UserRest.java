@@ -38,11 +38,11 @@ public class UserRest {
 			if(udb.checkUser(u)) // UserDAO.checkUser(U) méthode du DAO qui check si le user existe
 			{	
 		       location = new URI("http://localhost:8088/index.html");
-		       return Response.temporaryRedirect(location).build();
+		       return Response.seeOther(location).build();
 			}else 
 			{
 				location = new URI("http://localhost:8088/");
-				return Response.temporaryRedirect(location).build();
+				return Response.seeOther(location).build();
 			}
 	    	} catch (URISyntaxException e) {
 	    		e.printStackTrace();
@@ -64,11 +64,11 @@ public class UserRest {
     		{	
     			
     			location = new URI("http://localhost:8088/index.html");
-    			return Response.temporaryRedirect(location).build();
+    			return Response.seeOther(location).build();
     		}else 
     		{
 			location = new URI("http://localhost:8088/");
-			return Response.temporaryRedirect(location).build();
+			return Response.seeOther(location).build();
     		}
     	} catch (URISyntaxException e) {
     		e.printStackTrace();
