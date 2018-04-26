@@ -123,7 +123,7 @@ h1{
 }
 
 .btn-primary:hover { background: #c66995; }
-.tm-top-bar .navbar-expand-lg .navbar-nav .nav-link { padding: 50px 35px; }
+.tm-top-bar .tm-top-bar-large  .navbar-expand-lg .navbar-nav .nav-link { padding: 50px 35px; }
 
 .tm-top-bar {
     position: fixed;
@@ -133,7 +133,18 @@ h1{
     padding: 0;
     z-index: 10000;
     transition: all 0.2s ease-in-out;
-    height: 119px;
+    height: 60px;
+    background: white;
+}
+.tm-top-bar-large {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: 75px;
     background: white;
 }
 
@@ -151,8 +162,27 @@ h1{
 }
 
 .tm-top-bar.active .navbar-brand img { width: 40px; }
-.tm-top-bar-bg { height: 119px; }
+.tm-top-bar-bg { height: 60px; }
 .tm-top-bar a { color: black; }
+
+.tm-top-bar-large.active {
+    height: 60px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.tm-top-bar-large.active .navbar-expand-lg .navbar-nav .nav-link { padding: 20px 35px; }
+.tm-top-bar-large.active .navbar-brand { font-size: 1.4rem; }
+
+.tm-top-bar-large .navbar-brand img {
+    width: 75px;
+    height: auto;
+}
+
+.tm-top-bar-large.active .navbar-brand img { width: 40px; }
+.tm-top-bar-large-bg { height: 75px; }
+.tm-top-bar-large a { color: black; }
+
+
 
 .navbar-brand {
 	font-size: 2.2rem;    
@@ -562,7 +592,7 @@ footer p { color: white; }
     font-weight: 600;
 }
 
-#google-map { height: 500px; }
+#google-map { height: 560px; }
 
 @media screen and (max-width: 1080px) {
     .tm-tab-link-li { width: 25%; }
@@ -573,12 +603,12 @@ footer p { color: white; }
 }
 
 @media screen and (max-width: 991px) {
-    .tm-top-bar .navbar-expand-lg .navbar-nav .nav-link {
+    .tm-top-bar .tm-top-bar-large .navbar-expand-lg .navbar-nav .nav-link {
         padding: 15px 20px;
         background: white;
     }
 
-    .tm-top-bar, .tm-top-bar-bg { height: 60px; }
+    .tm-top-bar, .tm-top-bar-bg, .tm-top-bar-large { height: 60px; }
 
     #mainNav {
         width: 200px;
@@ -596,6 +626,12 @@ footer p { color: white; }
         display: flex;
         align-items: center;
     }
+	.tm-top-bar-large {
+        height: 75px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+    }
 
     .tm-top-bar.active .navbar-expand-lg .navbar-nav .nav-link,
     .tm-top-bar .navbar-expand-lg .navbar-nav .nav-link { padding: 15px; }
@@ -604,6 +640,10 @@ footer p { color: white; }
 
     .tm-top-bar .navbar-brand img {
         width: 60px;
+        height: auto;
+    }
+	.tm-top-bar-large .navbar-brand img {
+        width: 75px;
         height: auto;
     }
 
