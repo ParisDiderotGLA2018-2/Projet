@@ -3,11 +3,14 @@ package com.example.jetty_jersey.ws;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +21,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import com.example.jetty_jersey.bdd.UserDB;
 import com.example.jetty_jersey.model.*;
 import com.example.jetty_jersey.persistance.*;
 

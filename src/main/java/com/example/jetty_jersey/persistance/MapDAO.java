@@ -2,7 +2,7 @@ package com.example.jetty_jersey.persistance;
 
 import com.example.jetty_jersey.model.*;
 
-interface MapDAO {
+public interface MapDAO {
 	
 	// which user
 	MMap[] getMaps(String creator);

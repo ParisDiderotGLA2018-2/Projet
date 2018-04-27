@@ -1,12 +1,13 @@
-package com.example.jetty_jersey.persistance;
+package com.example.jetty_jersey.bdd;
 
 import java.io.IOException;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
 import com.example.jetty_jersey.model.User;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class Test {
 	static User U = new User("bla", "blo");

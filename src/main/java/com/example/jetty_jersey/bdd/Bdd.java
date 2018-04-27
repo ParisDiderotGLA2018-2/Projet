@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.persistance;
+package com.example.jetty_jersey.bdd;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -40,7 +40,7 @@ public class Bdd {
 			}
 		}
 		if(Bdd.client == null) {
-			System.out.println("La connexion a échouee");
+			System.out.println("La connexion a ï¿½chouee");
 			System.exit(1);
 		}
 		return Bdd.client;

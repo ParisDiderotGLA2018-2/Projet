@@ -1,7 +1,7 @@
 package com.example.jetty_jersey.ws;
 
+import com.example.jetty_jersey.bdd.MapDB;
 import com.example.jetty_jersey.model.*;
-import com.example.jetty_jersey.persistance.MapDB;
 
 import java.util.ArrayList;
 import java.util.HashMap;

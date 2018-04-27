@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.persistance;
+package com.example.jetty_jersey.bdd;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
@@ -21,6 +21,7 @@ import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
 import org.elasticsearch.search.SearchHit;
 
 import com.example.jetty_jersey.model.User;
+import com.example.jetty_jersey.persistance.UserDAO;
 
 public class UserDB implements UserDAO {
 

@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.persistance;
+package com.example.jetty_jersey.bdd;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,10 +16,9 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 
-
-import com.example.jetty_jersey.model.User;
 import com.example.jetty_jersey.model.Location;
 import com.example.jetty_jersey.model.MMap;
+import com.example.jetty_jersey.persistance.MapDAO;
 
 
 public class MapDB implements MapDAO {
