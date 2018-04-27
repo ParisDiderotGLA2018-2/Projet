@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.example.jetty_jersey.bdd.UserDB;
+import com.example.jetty_jersey.db.UserDB;
 import com.example.jetty_jersey.model.*;
 import com.example.jetty_jersey.persistance.*;
 

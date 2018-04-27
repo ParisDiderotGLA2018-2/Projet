@@ -2,22 +2,22 @@
 
 ## Tutoriel pour lancer le projet :
 
-Pour lancer le projet il suffit de lancer `elasticsearch` sur le terminal.
-Si les index ne sont pas créé référez vous au tuto pour faire fonctionner la
-base de donnée [ici](readmedb.md)
+For running this project you need to run `elasticsearch` in the terminal
+command. If there's no index follow the database tutorial [here](readmedb.md)
 
-Ensuite le serveur de JettyMain et aller dans `http://localhost:8088/` pour obtenir
-l'interface web et naviguer comme bon vous semble.
+Then run JettyMain in eclipse and go to `http://localhost:8088/`. You should
+the web interface and you can navigate as you wish.
 
-**ATTENTION :** si il y a un problème avec le nom du cluster veuillez lancer sur
-le terminal `elasticsearch -Ecluster.name=elasticsearch`
+**ATTENTION :** if there's a problem with the cluster's name please use
+ `elasticsearch -Ecluster.name=elasticsearch` in the terminal instead of
+ `elasticsearch`.
 
-## Arborescence du projet :
+## Project tree :
 
-**Interface Web :** src/main/webapp
+**Web Interface :** src/main/webapp
 
 **DAO :** src/main/java/com/jetty_jersey/persistance
 
-**BDD :** src/main/java/com/jetty_jersey/bdd
+**Database :** src/main/java/com/jetty_jersey/db
 
 **Web Service :** src/main/java/com/jetty_jersey/ws

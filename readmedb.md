@@ -1,10 +1,11 @@
-# TUTO
+# Database Tutorial
 
-Les mapping général sont disponible dans persistance dans le fichier json table.json
+The general mappings are availaible in persitance, in the json file named
+`table.json.`
 
-## 1. Mapping avec curl
+## 1. Mapping with curl
 
-- Exemple de mapping avec curl.
+- Example of mapping with curl.
 
 ```curl
 curl -XPUT 'http://localhost:9200/user/' -H 'Content-Type: application/json' -d '{
@@ -19,12 +20,12 @@ curl -XPUT 'http://localhost:9200/user/' -H 'Content-Type: application/json' -d 
 }'
 ```
 
-## 2. Faire un mapping sans curl.
+## 2. Mapping without curl.
 
-1. Démarrer elaticsearch.
-2. Démarrer kibana.
-3. Aller sur kibana à l'onget dev tool
-4. Mettre le code ci dessous pour créer par exemple index location
+1. Start elaticsearch.
+2. Start kibana.
+3. Go in kibana to the dev tool onglet
+4. Put the code below to create for example an index for location
 ```json
 PUT location
 {

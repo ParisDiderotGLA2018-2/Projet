@@ -1,6 +1,6 @@
 package com.example.jetty_jersey.ws;
 
-import com.example.jetty_jersey.bdd.MapDB;
+import com.example.jetty_jersey.db.MapDB;
 import com.example.jetty_jersey.model.*;
 
 import java.util.ArrayList;
