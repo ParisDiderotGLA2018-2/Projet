@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.bdd;
+package com.example.jetty_jersey.db;
 
 import java.io.IOException;
 
