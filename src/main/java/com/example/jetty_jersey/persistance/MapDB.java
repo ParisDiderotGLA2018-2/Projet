@@ -221,4 +221,32 @@ public  MMap[] getMaps(String creator) {
 			System.out.println("Aucune map trouve");
 		}
 	}
+	void updateMap(String name,String mapName,String placeName,String tag,String visib, String msg){
+		TransportClient client = Bdd.connectionToBD();
+		SearchResponse response = client.prepareSearch("map")
+		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+		.setQuery(QueryBuilders.matchPhraseQuery("name", mapName))
+		.get();
+		SearchHit[] hitTab = response.getHits().getHits();
+		if(hitTab.length != 0) {
+			SearchHit hit = hitTab[0];
+			String id = hit.getId();
+			
+		try {
+			client.prepareUpdate("map", "map", id)
+			.setDoc(jsonBuilder()               
+			    .startObject()
+			        .field("name", mapName)
+			        .field("visibilite", visib)
+			    .endObject())
+			.get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}else{
+			System.out.println("L'élement demander pour l'update n'éxiste pas");
+			return;
+		}
+	}
 }
