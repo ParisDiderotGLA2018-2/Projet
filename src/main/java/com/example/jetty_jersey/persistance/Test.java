@@ -32,7 +32,7 @@ public class Test {
 	}
 	public static void delete_map_test(){
 		System.out.println("Test delete map");
-		db.deleteMap(new MMap("IFNI",U.login,"public"));
+		db.deleteMap(U.login);
 		System.out.println("fin de test");
 
 	}

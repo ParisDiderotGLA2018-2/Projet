@@ -31,8 +31,6 @@ public class UserRest {
 			User u = new User(name, pass);
 			UserDB udb = new UserDB();
 			//200 or 403
-			String output = "GET :name: "+name+" and pass : "+pass;
-			System.out.println(output);
 			URI location;
 			
 			if(udb.checkUser(u)) // UserDAO.checkUser(U) méthode du DAO qui check si le user existe
@@ -58,8 +56,6 @@ public class UserRest {
     		URI location;	
     		//DAO.addUser(U);
     		UserDB udb = new UserDB();
-    		String output = "POST : name: "+name+" and pass : "+pass;
-    		System.out.println(output);
     		if(udb.addUser(new User(name, pass)))////name.equals(DAO.verifierUser(name)); //jsp la condition si le login existe deja par EX
     		{	
     			location = new URI("http://localhost:8088/index.html");

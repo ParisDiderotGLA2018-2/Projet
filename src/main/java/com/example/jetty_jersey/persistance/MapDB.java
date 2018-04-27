@@ -224,7 +224,7 @@ public class MapDB implements MapDAO {
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
-			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
+			DeleteResponse response2 = client.prepareDelete("location", "location", id).get();
 
 		}
 		else{
@@ -232,25 +232,24 @@ public class MapDB implements MapDAO {
 		}
 	}
 
-	public void deleteMap(MMap instance) {
+	public void deleteMap(String name) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-
-        .setQuery(QueryBuilders.matchPhraseQuery("name", instance.name))
+        .setQuery(QueryBuilders.matchPhraseQuery("name", name))
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
 			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
-
 		}
 		else{
 			System.out.println("Aucune map trouve");
 		}
 	}
-	void updateMap(String name,String mapName,String placeName,String tag,String visib, String msg){
+	
+	public void updateMap(String name,String mapName,String placeName,String tag,String visib, String msg){
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
@@ -274,7 +273,7 @@ public class MapDB implements MapDAO {
 			e.printStackTrace();
 		}
 		}else{
-			System.out.println("L'élement demander pour l'update n'éxiste pas");
+			System.out.println("L'ï¿½lement demander pour l'update n'ï¿½xiste pas");
 			return;
 		}
 	}

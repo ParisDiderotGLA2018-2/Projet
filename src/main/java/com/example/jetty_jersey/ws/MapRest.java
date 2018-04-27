@@ -115,6 +115,8 @@ public class MapRest {
 			@PathParam("place") String place,@FormParam("tag") String tag,
 			@FormParam("msg") String msg,@FormParam("visib") String visib) {
 		//DAO.updateMap(name,namemap,place,tag,visib,msg)
+		MapDB mdb = new MapDB();
+		mdb.updateMap(name, namemap, place, tag, visib, msg);
 		try {
 			URI location = new URI("http://localhost:8088/index.html");
 		       return Response.seeOther(location).entity("map").build();
@@ -127,10 +129,12 @@ public class MapRest {
 	@DELETE
 	@Path("/{name}/{namemap}/{place}/delete")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response UpdateMap(@PathParam("name") String name,
+	public Response deleteMap(@PathParam("name") String name,
 							@PathParam("namemap") String namemap,
 							@PathParam("place") String place) {
 			//DAO.deleteMap(name,namemap,place)
+			MapDB mdb = new MapDB();
+			mdb.deleteMap(namemap);
 			try {
 				URI location = new URI("http://localhost:8088/index.html");
 			       return Response.seeOther(location).entity("map").build();

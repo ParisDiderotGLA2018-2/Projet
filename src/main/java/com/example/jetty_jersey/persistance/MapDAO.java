@@ -14,5 +14,5 @@ interface MapDAO {
 	void addMap(MMap instance);
 	//void updateMap(String name,String mapName,String placeName,tag,visib,msg);
 	void deletePlace(MMap instance, Location l);
-	void deleteMap(MMap instance);
+	void deleteMap(String name);
 }
