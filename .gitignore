@@ -16,8 +16,5 @@ target/classes/com/example/jetty_jersey/model/User.class
 target/classes/com/example/jetty_jersey/model/MMap.class
 target/classes/com/example/jetty_jersey/model/Location.class
 target/classes/com/example/jetty_jersey/JettyMain.class
-target/classes/com/example/jetty_jersey/.DS_Store
-target/classes/com/example/.DS_Store
-target/classes/com/.DS_Store
-target/classes/.DS_Store
+.DS_Store
 /target/

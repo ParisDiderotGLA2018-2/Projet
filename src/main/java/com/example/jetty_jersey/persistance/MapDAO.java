@@ -9,7 +9,7 @@ interface MapDAO {
 	
 	// Donne les infos d'un lieu. 
 	//Le type de retour est map pour renvoyer aussi le nom de la map
-	MMap InfoLocation(String login, String mapName, String mapPlace); 
+	MMap infoLocation(String login, String mapName, String mapPlace); 
 
 	void addMap(MMap instance);
 	//void updateMap(String name,String mapName,String placeName,tag,visib,msg);

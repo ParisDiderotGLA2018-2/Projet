@@ -60,29 +60,32 @@ public class MapDB implements MapDAO {
 
 	}
 
-public  MMap[] getMaps(String creator) {
-
-	TransportClient client = Bdd.connectionToBD();
-	SearchResponse response = client.prepareSearch("map")
-    .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-    .setQuery(QueryBuilders.matchPhraseQuery("creator", creator))
-    .get();
-	ArrayList<MMap> tab =new ArrayList<MMap>();
-	SearchHit[] hitTab = response.getHits().getHits();
-	for(int i = 0; i < hitTab.length ; i++) {
-		SearchHit hit = hitTab[i];
-		String location = (String) hit.getSourceAsMap().get("location");
-		logger.debug("location id : " + location);
-		String name = (String) hit.getSourceAsMap().get("name");
-		String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-		tab.add(new MMap(name,creator,visibilite));
+	public  MMap[] getMaps(String creator) {
+	
+		TransportClient client = Bdd.connectionToBD();
+		SearchResponse response = client.prepareSearch("map")
+	    .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+	    .setQuery(QueryBuilders.matchPhraseQuery("creator", creator))
+	    .get();
+		ArrayList<MMap> tab =new ArrayList<MMap>();
+		SearchHit[] hitTab = response.getHits().getHits();
+		for(int i = 0; i < hitTab.length ; i++) {
+			SearchHit hit = hitTab[i];
+			//String location = (String) hit.getSourceAsMap().get("location");
+			//logger.debug("location id : " + location);
+			String name = (String) hit.getSourceAsMap().get("name");
+			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
+			String id = hit.getId();
+			MMap map = new MMap(name,creator,visibilite, getLocation(id));
+			tab.add(map);
+		}
+		MMap  [] tab2 = new MMap  [tab.size()];
+		for(int i = 0; i < tab.size(); i++){
+			tab2[i] = tab.get(i);
+		}
+		return tab2;
 	}
-	MMap  [] tab2 = new MMap  [tab.size()];
-	for(int i = 0; i < tab.size(); i++){
-		tab2[i] = tab.get(i);
-	}
-	return tab2;
-}
+	
 	public void addMap(MMap instance) {
 		TransportClient client = Bdd.connectionToBD();
 		try {
@@ -130,12 +133,13 @@ public  MMap[] getMaps(String creator) {
 		tab2[tab2.length-1] = Integer.toString(hitTab.length);
 		return tab2;
 	}
-	public Location getLocation (String id, String place){
+	
+	public Location getLocationByPlace (String id, String place){
 		TransportClient client = Bdd.connectionToBD();
-		SearchResponse response = client.prepareSearch("map")
+		SearchResponse response = client.prepareSearch("location")
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 				.setQuery(QueryBuilders.matchPhraseQuery("idMap",id )) // rajouter le createur
-        .get();
+				.get();
 		
 		SearchHit[] hitTab = response.getHits().getHits();
 		
@@ -158,7 +162,34 @@ public  MMap[] getMaps(String creator) {
 		}
 		return null;
 	}
-	public MMap InfoLocation(String login, String mapName, String mapPlace) {
+	
+	public ArrayList<Location> getLocation (String id){
+		TransportClient client = Bdd.connectionToBD();
+		SearchResponse response = client.prepareSearch("location")
+				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+				.setQuery(QueryBuilders.matchPhraseQuery("idMap",id ))
+				.get();
+		
+		SearchHit[] hitTab = response.getHits().getHits();
+		if(hitTab.length != 0) {
+			ArrayList<Location> locationList = new ArrayList<Location>();
+			for(int i = 0; i < hitTab.length; i++){
+				SearchHit hit = hitTab[i];
+				String place = (String) hit.getSourceAsMap().get("place");
+				double lat = Double.parseDouble((String) hit.getSourceAsMap().get("lat"));
+				double lng = Double.parseDouble((String) hit.getSourceAsMap().get("lng"));
+				String tag = (String) hit.getSourceAsMap().get("tag");
+				String msg = (String) hit.getSourceAsMap().get("msg");
+				String filename = (String) hit.getSourceAsMap().get("filename");
+				locationList.add(new Location (place,lat,lng,tag,msg,filename));
+			}
+			return locationList;
+		}
+		logger.debug("get location :. impossible de trouver la location");
+		return null;
+	}
+	
+	public MMap infoLocation(String login, String mapName, String mapPlace) {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("map")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
@@ -170,12 +201,12 @@ public  MMap[] getMaps(String creator) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
 			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-			Location l =this.getLocation(id, mapPlace);
+			Location l =this.getLocationByPlace(id, mapPlace);
 			MMap m = new MMap(mapName,login,visibilite);
 			m.setLocation(l);
 			return m ;
 		}else{
-			System.out.println("Aucune Location a été touvé");
+			System.out.println("Aucune Location a ï¿½tï¿½ touvï¿½");
 		}
 		logger.debug("attention l'argument de MMap est null");
 		return null;
@@ -193,7 +224,6 @@ public  MMap[] getMaps(String creator) {
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
-			System.out.println(id);
 			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
 
 		}
@@ -213,7 +243,6 @@ public  MMap[] getMaps(String creator) {
 		if(hitTab.length != 0) {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
-			System.out.println(id);
 			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
 
 		}
