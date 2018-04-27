@@ -1,6 +1,6 @@
-# GLA - Projet : Equipe 2
+# GLA - Project : Team 2
 
-## Tutoriel pour lancer le projet :
+## Tutorial for the project :
 
 For running this project you need to run `elasticsearch` in the terminal
 command. If there's no index follow the database tutorial [here](readmedb.md)
