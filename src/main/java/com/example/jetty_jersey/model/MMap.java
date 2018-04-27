@@ -11,24 +11,21 @@ public class MMap {
 
 	// constructors
 
-
-	public MMap(String name,String creator,String visibilite) {
+	public MMap(String name, String creator, String visibilite) {
 		this.name = name;
-		this.creator=creator;
-		this.location= new ArrayList<Location>();
-		this.visibilite=visibilite;
+		this.creator = creator;
+		this.location = new ArrayList<Location>();
+		this.visibilite = visibilite;
 	}
 	
-	public MMap(String name,String creator,String visibilite, ArrayList<Location> location) {
+	public MMap(String name, String creator, String visibilite, ArrayList<Location> location) {
 		this.name = name;
-		this.creator=creator;
-		this.location= location;
-		this.visibilite=visibilite;
+		this.creator = creator;
+		this.location = location;
+		this.visibilite = visibilite;
 	}
 
 	public void setLocation(Location l) {
 		location.add(l);
 	}
-
-
 }

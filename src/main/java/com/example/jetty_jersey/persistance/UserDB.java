@@ -24,7 +24,7 @@ import com.example.jetty_jersey.model.User;
 
 public class UserDB implements UserDAO {
 
-	public static void authoriseModifUser(){
+	public static void authoriseModifUser() {
 		TransportClient client = Bdd.connectionToBD();
 		UpdateByQueryRequestBuilder updateByQuery = UpdateByQueryAction.INSTANCE.newRequestBuilder(client);
 		updateByQuery.source("user").abortOnVersionConflict(false);
@@ -51,7 +51,7 @@ public class UserDB implements UserDAO {
 	}
 
 	public boolean addUser(User instance) {
-		User inst =  instance;
+		User inst = instance;
 		TransportClient client = Bdd.connectionToBD();
 		//UserDB.authoriseModifUser();
 		//Map<String, Object> json = new HashMap<String, Object>();
@@ -98,12 +98,10 @@ public class UserDB implements UserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void deleteUser(User instance) {
 		// TODO Auto-generated method stub
 
 	}
-
 }

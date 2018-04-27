@@ -26,7 +26,7 @@ public class MapDB implements MapDAO {
     private static final Logger logger = LogManager.getLogger(MapDB.class);
 
 
-	/* Rappel des champs utiliser : 
+	/* Rappel des champs utilises : 
 	 * MAP : 
 	 * 	public String name;
 		public User creator;
@@ -39,15 +39,14 @@ public class MapDB implements MapDAO {
 		public String tag;
 		public String msg;
 		public String filename;
-
 	*
 	 */
 	public void addLocation(String idMap,Location l) throws IOException{
 		TransportClient client = Bdd.connectionToBD();
-		IndexResponse response = client.prepareIndex("location","location")
+		IndexResponse response = client.prepareIndex("location", "location")
 		        .setSource(jsonBuilder()
 		                    .startObject()
-		                    	.field("idMap",idMap)
+		                    	.field("idMap", idMap)
 		                        .field("place", l.place)
 		                        .field("lat", ""+ l.lat)
 		                        .field("lng", ""+l.lng)
@@ -67,7 +66,7 @@ public class MapDB implements MapDAO {
 	    .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 	    .setQuery(QueryBuilders.matchPhraseQuery("creator", creator))
 	    .get();
-		ArrayList<MMap> tab =new ArrayList<MMap>();
+		ArrayList<MMap> tab = new ArrayList<MMap>();
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
@@ -76,11 +75,11 @@ public class MapDB implements MapDAO {
 			String name = (String) hit.getSourceAsMap().get("name");
 			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
 			String id = hit.getId();
-			MMap map = new MMap(name,creator,visibilite, getLocation(id));
+			MMap map = new MMap(name, creator, visibilite, getLocation(id));
 			tab.add(map);
 		}
-		MMap  [] tab2 = new MMap  [tab.size()];
-		for(int i = 0; i < tab.size(); i++){
+		MMap  [] tab2 = new MMap [tab.size()];
+		for(int i = 0; i < tab.size(); i++) {
 			tab2[i] = tab.get(i);
 		}
 		return tab2;
@@ -101,7 +100,7 @@ public class MapDB implements MapDAO {
 			        .get();
 			String _id = response.getId();
 			ArrayList<Location> ll = instance.location;
-			for(Location tmpL : ll){
+			for(Location tmpL : ll) {
 				this.addLocation(_id, tmpL);
 			}
 			
@@ -117,7 +116,7 @@ public class MapDB implements MapDAO {
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
         .setQuery(QueryBuilders.matchPhraseQuery("creator", login))
         .get();
-		ArrayList<String> tab =new ArrayList<String>();
+		ArrayList<String> tab = new ArrayList<String>();
 		SearchHit[] hitTab = response.getHits().getHits();
 		for(int i = 0; i < hitTab.length ; i++) {
 			SearchHit hit = hitTab[i];
@@ -138,7 +137,7 @@ public class MapDB implements MapDAO {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				.setQuery(QueryBuilders.matchPhraseQuery("idMap",id )) // rajouter le createur
+				.setQuery(QueryBuilders.matchPhraseQuery("idMap", id)) // rajouter le createur
 				.get();
 		
 		SearchHit[] hitTab = response.getHits().getHits();
@@ -147,17 +146,17 @@ public class MapDB implements MapDAO {
 			for(int i = 0; i < hitTab.length; i++){
 				SearchHit hit = hitTab[i];
 				String placetmp = (String) hit.getSourceAsMap().get("place");
-				if(placetmp.equals(place)){
+				if(placetmp.equals(place)) {
 					double lat = Double.parseDouble((String) hit.getSourceAsMap().get("lat"));
 					double lng = Double.parseDouble((String) hit.getSourceAsMap().get("lng"));
 					String tag = (String) hit.getSourceAsMap().get("tag");
 					String msg = (String) hit.getSourceAsMap().get("msg");
 					String filename = (String) hit.getSourceAsMap().get("filename");
-					return new Location (place,lat,lng,tag,msg,filename);
+					return new Location (place, lat, lng, tag, msg, filename);
 				}
 			}
-		}else{
-			logger.debug("get location :. impossible de trouver la location");
+		} else {
+			logger.debug("get location : impossible de trouver la location");
 			return null;
 		}
 		return null;
@@ -167,7 +166,7 @@ public class MapDB implements MapDAO {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
 				.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-				.setQuery(QueryBuilders.matchPhraseQuery("idMap",id ))
+				.setQuery(QueryBuilders.matchPhraseQuery("idMap", id))
 				.get();
 		
 		SearchHit[] hitTab = response.getHits().getHits();
@@ -181,11 +180,11 @@ public class MapDB implements MapDAO {
 				String tag = (String) hit.getSourceAsMap().get("tag");
 				String msg = (String) hit.getSourceAsMap().get("msg");
 				String filename = (String) hit.getSourceAsMap().get("filename");
-				locationList.add(new Location (place,lat,lng,tag,msg,filename));
+				locationList.add(new Location (place, lat, lng, tag, msg, filename));
 			}
 			return locationList;
 		}
-		logger.debug("get location :. impossible de trouver la location");
+		logger.debug("get location : impossible de trouver la location");
 		return null;
 	}
 	
@@ -201,12 +200,13 @@ public class MapDB implements MapDAO {
 			SearchHit hit = hitTab[0];
 			String id = hit.getId();
 			String visibilite = (String) hit.getSourceAsMap().get("visibilite");
-			Location l =this.getLocationByPlace(id, mapPlace);
+			Location l = this.getLocationByPlace(id, mapPlace);
 			MMap m = new MMap(mapName,login,visibilite);
 			m.setLocation(l);
 			return m ;
-		}else{
-			System.out.println("Aucune Location a �t� touv�");
+			
+		} else {
+			System.out.println("Aucune Location n'a ete trouvee");
 		}
 		logger.debug("attention l'argument de MMap est null");
 		return null;
@@ -217,7 +217,7 @@ public class MapDB implements MapDAO {
 		TransportClient client = Bdd.connectionToBD();
 		SearchResponse response = client.prepareSearch("location")
         .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)     
-        //.setQuery(QueryBuilders.multiMatchQuery("place",l.place), (name,instance.name)) // a tester
+        //.setQuery(QueryBuilders.multiMatchQuery("place", l.place), (name,instance.name)) // a tester
         .setQuery(QueryBuilders.matchPhraseQuery("place", l.place))
         .get();
 		SearchHit[] hitTab = response.getHits().getHits();
@@ -227,7 +227,7 @@ public class MapDB implements MapDAO {
 			DeleteResponse response2 = client.prepareDelete("location", "location", id).get();
 
 		}
-		else{
+		else {
 			System.out.println("Aucune location trouve");
 		}
 	}
@@ -244,8 +244,8 @@ public class MapDB implements MapDAO {
 			String id = hit.getId();
 			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
 		}
-		else{
-			System.out.println("Aucune map trouve");
+		else {
+			System.out.println("Aucune map trouvee");
 		}
 	}
 	
@@ -272,8 +272,8 @@ public class MapDB implements MapDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}else{
-			System.out.println("L'�lement demander pour l'update n'�xiste pas");
+		}else {
+			System.out.println("L'element demande pour l'update n'existe pas");
 			return;
 		}
 	}

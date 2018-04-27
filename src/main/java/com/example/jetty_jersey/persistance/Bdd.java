@@ -32,30 +32,32 @@ public class Bdd {
 				Settings settings = Settings.builder()
 				       .put("client.transport.sniff", true).build();
 				Bdd.client = new PreBuiltTransportClient(settings)
-						.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300))
-				;//		.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
+						.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
+				//		.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		if(Bdd.client == null){
-			System.out.println("La connexion à échouer");
+		if(Bdd.client == null) {
+			System.out.println("La connexion a échouee");
 			System.exit(1);
 		}
 		return Bdd.client;
 
 	}
-	public static void disconnect(){
+	
+	public static void disconnect() {
 		Bdd.client.close();
 	}
+	
 	public static void test(String[] args) {
 		// TODO Auto-generated method stub
 		TransportClient client = connectionToBD();
 		Map<String, Object> json = new HashMap<String, Object>();
-		json.put("user","kimchy");
-		json.put("postDate",new Date());
-		json.put("message","trying out Elasticsearch");
+		json.put("user", "kimchy");
+		json.put("postDate", new Date());
+		json.put("message", "trying out Elasticsearch");
 		/**
 		 * Creer un JSON :
 		 */
@@ -97,11 +99,9 @@ public class Bdd {
 		String _id = response.getId();
 		// Version (if it's the first time you index this document, you will get: 1)
 		long _version = response.getVersion();
-		// status has stored current instance statement.
+		// status has stored current instance statement
 		RestStatus status = response.status();
 
 		System.out.println(_index + _type + _id + _version );
-
-
 	}
 }

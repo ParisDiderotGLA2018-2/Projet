@@ -30,14 +30,12 @@ public class UserRest {
 		try {
 			User u = new User(name, pass);
 			UserDB udb = new UserDB();
-			//200 or 403
+			// 200 or 403
 			URI location;
 			
-			if(udb.checkUser(u)) // UserDAO.checkUser(U) méthode du DAO qui check si le user existe
-			{	
+			if(udb.checkUser(u)) { // UserDAO.checkUser(U) methode du DAO qui check si le user existe
 		       location = new URI("http://localhost:8088/index.html");
-			}else 
-			{
+			} else {
 				location = new URI("http://localhost:8088/");
 			}
 			return Response.seeOther(location).entity("user").build();
@@ -56,11 +54,9 @@ public class UserRest {
     		URI location;	
     		//DAO.addUser(U);
     		UserDB udb = new UserDB();
-    		if(udb.addUser(new User(name, pass)))////name.equals(DAO.verifierUser(name)); //jsp la condition si le login existe deja par EX
-    		{	
+    		if(udb.addUser(new User(name, pass))) { // name.equals(DAO.verifierUser(name)); //jsp la condition si le login existe deja par EX	
     			location = new URI("http://localhost:8088/index.html");
-    		}else 
-    		{
+    		} else {
     			location = new URI("http://localhost:8088/");
     		}
 			return Response.seeOther(location).entity("user").build();
