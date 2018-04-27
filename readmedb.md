@@ -1,7 +1,8 @@
-#TUTO
+# TUTO
 
 Les mapping général sont disponible dans persistance dans le fichier json table.json
-##1. Mapping avec curl
+
+## 1. Mapping avec curl
 
 - Exemple de mapping avec curl.
 
@@ -18,7 +19,7 @@ curl -XPUT 'http://localhost:9200/user/' -H 'Content-Type: application/json' -d 
 }'
 ```
 
-##2. Faire un mapping sans curl.
+## 2. Faire un mapping sans curl.
 
 1. Démarrer elaticsearch.
 2. Démarrer kibana.
