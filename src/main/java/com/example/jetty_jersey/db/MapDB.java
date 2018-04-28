@@ -205,7 +205,7 @@ public class MapDB implements MapDAO {
 			return m ;
 			
 		} else {
-			System.out.println("Aucune Location n'a ete trouvee");
+			logger.debug("Aucune Location n'a ete trouvee");
 		}
 		logger.debug("attention l'argument de MMap est null");
 		return null;
@@ -227,7 +227,7 @@ public class MapDB implements MapDAO {
 
 		}
 		else {
-			System.out.println("Aucune location trouve");
+			logger.debug("Aucune location trouve");
 		}
 	}
 
@@ -244,7 +244,7 @@ public class MapDB implements MapDAO {
 			DeleteResponse response2 = client.prepareDelete("map", "map", id).get();
 		}
 		else {
-			System.out.println("Aucune map trouvee");
+			logger.debug("Aucune map trouvee");
 		}
 	}
 	
@@ -272,7 +272,7 @@ public class MapDB implements MapDAO {
 			e.printStackTrace();
 		}
 		}else {
-			System.out.println("L'element demande pour l'update n'existe pas");
+			logger.debug("L'element demande pour l'update n'existe pas");
 			return;
 		}
 	}

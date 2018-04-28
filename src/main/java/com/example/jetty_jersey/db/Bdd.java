@@ -9,6 +9,8 @@ import java.util.Map;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.TransportAddress;
@@ -23,11 +25,12 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 public class Bdd {
 
 	private static TransportClient client = null;
+	private static final Logger logger = LogManager.getLogger(MapDB.class);
 
 	@SuppressWarnings("resource")
 	public synchronized static TransportClient connectionToBD(){
 		if(Bdd.client == null) {
-			System.out.println("Connection DB ");
+			logger.debug("Connection DB ");
 			try {
 				Settings settings = Settings.builder()
 				       .put("client.transport.sniff", true).build();
@@ -40,7 +43,7 @@ public class Bdd {
 			}
 		}
 		if(Bdd.client == null) {
-			System.out.println("La connexion a �chouee");
+			logger.debug("La connexion a echouee");
 			System.exit(1);
 		}
 		return Bdd.client;
@@ -101,7 +104,5 @@ public class Bdd {
 		long _version = response.getVersion();
 		// status has stored current instance statement
 		RestStatus status = response.status();
-
-		System.out.println(_index + _type + _id + _version );
 	}
 }
